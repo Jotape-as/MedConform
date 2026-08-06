@@ -13,13 +13,13 @@ class DocumentoService:
         return self.repo.buscar_por_id(id)
 
     def adicionar(self, nome, categoria, descricao, validade, status):
-      return self.repo.adicionar(nome, categoria, descricao, validade, status)
+        return self.repo.adicionar(nome, categoria, descricao, validade, status)
 
     def atualizar(self, id, nome, categoria, descricao, validade, status):
-        self.repo.atualizar(id, nome, categoria, descricao, validade, status)
+        return self.repo.atualizar(id, nome, categoria, descricao, validade, status)
 
     def excluir(self, id):
-        self.repo.excluir(id)
+        return self.repo.excluir(id)
 
     def criar_tabela(self):
         self.repo.criar_tabela()

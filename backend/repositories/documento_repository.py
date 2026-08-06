@@ -79,16 +79,26 @@ class DocumentoRepository:
       """, (nome, categoria, descricao, validade, status, id))
 
       conexao.commit()
+
+      linhas_afetadas = cursor.rowcount
+
       conexao.close()
+
+      return linhas_afetadas
 
     def excluir(self, id):
         conexao = self.conectar()
         cursor = conexao.cursor()
-
+    
         cursor.execute("""
         DELETE FROM documento
         WHERE id = ?
         """, (id,))
-
+    
         conexao.commit()
+    
+        linhas_afetadas = cursor.rowcount
+    
         conexao.close()
+    
+        return linhas_afetadas
