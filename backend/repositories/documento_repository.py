@@ -1,4 +1,5 @@
 import sqlite3
+<<<<<<< HEAD
 from models.documento import Documento
 class DocumentoRepository:
 
@@ -25,10 +26,20 @@ class DocumentoRepository:
        conexao.close()
 
     def adicionar(self, nome, categoria, descricao, validade, status):
+=======
+
+class DocumentoRepository:
+
+    def conectar(self):
+        return sqlite3.connect("medconform.db")
+
+    def criar_tabela(self):
+>>>>>>> e673010ab566b5d6ecc72b5afa257c15d8e3dc1c
         conexao = self.conectar()
         cursor = conexao.cursor()
 
         cursor.execute("""
+<<<<<<< HEAD
         INSERT INTO documento 
         (nome, categoria, descricao, validade, status)
         VALUES (?, ?, ?, ?, ?)
@@ -82,13 +93,33 @@ class DocumentoRepository:
       conexao.close()
 
     def excluir(self, id):
+=======
+        CREATE TABLE IF NOT EXISTS documento (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            categoria TEXT NOT NULL,
+            descricao TEXT
+        )
+        """)
+
+        conexao.commit()
+        conexao.close()
+
+    def adicionar(self, nome, categoria, descricao):
+>>>>>>> e673010ab566b5d6ecc72b5afa257c15d8e3dc1c
         conexao = self.conectar()
         cursor = conexao.cursor()
 
         cursor.execute("""
+<<<<<<< HEAD
         DELETE FROM documento
         WHERE id = ?
         """, (id,))
+=======
+        INSERT INTO documento (nome, categoria, descricao)
+        VALUES (?, ?, ?)
+        """, (nome, categoria, descricao))
+>>>>>>> e673010ab566b5d6ecc72b5afa257c15d8e3dc1c
 
         conexao.commit()
         conexao.close()
