@@ -6,6 +6,11 @@ documento_bp = Blueprint("documento", __name__)
 service = DocumentoService()
 
 
+@documento_bp.route("/", methods=["GET"])
+def inicio():
+    return "MedConform funcionando!"
+
+
 @documento_bp.route("/documentos", methods=["POST"])
 def criar_documento():
     dados = request.get_json() or {}
