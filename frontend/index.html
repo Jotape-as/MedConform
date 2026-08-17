@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MedConform</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>MedConform</h1>
+        <p>Gerenciamento de documentos</p>
+    </header>
+
+
+    <main>
+
+        <section class="card">
+
+            <h2>Novo Documento</h2>
+
+            <input id="nome" type="text" placeholder="Nome do documento">
+
+            <input id="categoria" type="text" placeholder="Categoria">
+
+            <input id="descricao" type="text" placeholder="Descrição">
+
+            <input id="validade" type="date">
+
+            <select id="status">
+                <option value="Ativo">Ativo</option>
+                <option value="Vencido">Vencido</option>
+            </select>
+
+            <button id="botao-salvar" onclick="salvarDocumento()">
+                Cadastrar
+            </button>
+
+        </section>
+
+
+        <section class="card">
+
+            <h2>Documentos cadastrados</h2>
+
+            <table>
+            
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+            
+                <tbody id="tabela-documentos">
+                
+                </tbody>
+            
+            </table>
+
+        </section>
+
+    </main>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+}
+
+
+header {
+    background: #1e3a8a;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+
+main {
+    width: 90%;
+    margin: 30px auto;
+}
+
+
+.card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+button:hover {
+    background: #1d4ed8;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
