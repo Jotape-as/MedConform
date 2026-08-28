@@ -75,3 +75,18 @@ Projeto desenvolvido em equipe por alunos do Colégio COTEMIG.
 ## Contexto acadêmico
 
 Projeto desenvolvido no **Colégio COTEMIG** como parte da formação técnica em Redes e Arquitetura de Computadores.
+
+## 🚀 Funcionalidades Implementadas
+
+O projeto Medconform atende aos requisitos propostos entregando um fluxo de operações completo (CRUD) com arquitetura dividida em Services e Controllers, além de uma interface assíncrona. As 10 funcionalidades implementadas são:
+
+1. **Criar Solicitação de OPME (POST):** Cadastro de novas solicitações contendo dados do paciente, médico solicitante e detalhes de procedimentos cirúrgicos.
+2. **Listar Solicitações (GET):** Busca no banco de dados e exibição dinâmica dos registros na tabela principal do sistema.
+3. **Atualizar Status da Solicitação (PUT):** Aprovação ou negação rápida de solicitações ativas diretamente pelos botões de ação na interface.
+4. **Excluir Solicitação (DELETE):** Remoção permanente e segura de registros de solicitações do banco de dados.
+5. **Anexar Novo Documento (POST):** Cadastro de laudos, exames de imagem e guias de convênio na aba de Gestão de Documentos.
+6. **Listar Documentos Clínicos (GET):** Visualização em tabela de todos os arquivos anexados, categorizados por tipo e status.
+7. **Excluir Documento (DELETE):** Remoção de documentos indesejados, expirados ou cadastrados incorretamente.
+8. **Editar Documento (PUT):** Reaproveitamento do formulário para carregar e atualizar os dados de um documento já existente.
+9. **Dashboard de Estatísticas em Tempo Real (GET):** Endpoint dedicado no backend para calcular e exibir dinamicamente os Indicadores Chave (KPIs) nos cards superiores (Total de pendências, aprovadas/negadas).
+10. **Filtros Dinâmicos de Tabela (Frontend):** Algoritmo em JavaScript que permite alternar as abas ("Todos os Casos", "Pendentes", "Aprovados") filtrando os dados na tela instantaneamente sem a necessidade de recarregar a página.
