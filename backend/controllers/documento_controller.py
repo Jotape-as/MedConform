@@ -1,96 +1,50 @@
-from flask import Blueprint, request, jsonify
-from services.documento_service import DocumentoService
+from flask import jsonify
+from services.criar_documento_service import CriarDocumentoService
+from services.listar_documentos_service import ListarDocumentosService
+from services.excluir_documento_service import ExcluirDocumentoService
+from services.atualizar_documento_service import AtualizarDocumentoService
 
-documento_bp = Blueprint("documento", __name__)
+class DocumentoController:
+    def criar(self, request):
+        try:
+            dados = request.get_json()
+            service = CriarDocumentoService()
+            novo_doc = service.executar(dados)
+            
+            return jsonify({
+                "mensagem": "Documento anexado com sucesso!",
+                "id_documento": novo_doc.id
+            }), 201
+            
+        except ValueError as ve:
+            return jsonify({"erro": str(ve)}), 400
+        except Exception as e:
+            return jsonify({"erro": f"Erro interno: {str(e)}"}), 500
 
-service = DocumentoService()
+    def listar(self):
+        try:
+            service = ListarDocumentosService()
+            documentos = service.executar()
+            
+            lista = [doc.to_dict() for doc in documentos]
+            
+            return jsonify(lista), 200
+        except Exception as e:
+            return jsonify({"erro": str(e)}), 500
 
+    def excluir(self, documento_id):
+        try:
+            service = ExcluirDocumentoService()
+            service.executar(documento_id)
+            return jsonify({"mensagem": "Documento excluído permanentemente!"}), 200
+        except Exception as e:
+            return jsonify({"erro": str(e)}), 400
 
-@documento_bp.route("/documentos", methods=["POST"])
-def criar_documento():
-    dados = request.get_json() or {}
-
-    nome = dados.get("nome")
-    categoria = dados.get("categoria")
-    descricao = dados.get("descricao")
-    validade = dados.get("validade")
-    status = dados.get("status")
-
-    if not nome or not categoria or not status:
-        return jsonify({
-            "erro": "Nome, categoria e status são obrigatórios"
-        }), 400
-
-    id_documento = service.adicionar(
-        nome,
-        categoria,
-        descricao,
-        validade,
-        status
-    )
-
-    return jsonify({
-        "mensagem": "Documento cadastrado com sucesso!",
-        "id": id_documento
-    }), 201
-
-@documento_bp.route("/documentos", methods=["GET"])
-def listar_documentos():
-    documentos = service.listar()
-    return jsonify([documento.to_dict() for documento in documentos])
-
-
-@documento_bp.route("/documentos/<int:id>", methods=["GET"])
-def buscar_documento(id):
-    documento = service.buscar_por_id(id)
-
-    if documento:
-        return jsonify(documento.to_dict())
-
-    return jsonify({"erro": "Documento não encontrado"}), 404
-
-
-@documento_bp.route("/documentos/<int:id>", methods=["PUT"])
-def atualizar_documento(id):
-
-    dados = request.get_json() or {}
-
-    nome = dados.get("nome")
-    categoria = dados.get("categoria")
-    descricao = dados.get("descricao")
-    validade = dados.get("validade")
-    status = dados.get("status")
-
-    if not nome or not categoria or not status:
-        return jsonify({
-            "erro": "Nome, categoria e status são obrigatórios"
-        }), 400
-
-    documento = service.buscar_por_id(id)
-
-    if not documento:
-        return jsonify({
-            "erro": "Documento não encontrado"
-        }), 404
-
-    service.atualizar(id, nome, categoria, descricao, validade, status)
-
-    return jsonify({
-        "mensagem": "Documento atualizado com sucesso!"
-    }), 200
-
-
-@documento_bp.route("/documentos/<int:id>", methods=["DELETE"])
-def excluir_documento(id):
-    documento = service.buscar_por_id(id)
-
-    if not documento:
-        return jsonify({
-            "erro": "Documento não encontrado"
-        }), 404
-
-    service.excluir(id)
-
-    return jsonify({
-        "mensagem": "Documento excluído com sucesso!"
-    }), 200
+    def atualizar(self, documento_id, request):
+        try:
+            dados = request.get_json()
+            service = AtualizarDocumentoService()
+            service.executar(documento_id, dados)
+            return jsonify({"mensagem": "Documento atualizado com sucesso!"}), 200
+        except Exception as e:
+            return jsonify({"erro": str(e)}), 400

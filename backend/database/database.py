@@ -1,6 +1,4 @@
-import sqlite3
+from flask_sqlalchemy import SQLAlchemy
 
-DATABASE = "database/medconform.db"
-
-def get_connection():
-    return sqlite3.connect(DATABASE)
+# Instancia o banco de dados (padrão Factory)
+db = SQLAlchemy()

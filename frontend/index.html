@@ -4,75 +4,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>MedConform</title>
-
+    <title>Medconform - Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>MedConform</h1>
-        <p>Gerenciamento de documentos</p>
-    </header>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="logo-area">
+                    <div class="logo-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
+                    <div class="logo-text">
+                        <h1>Medconform</h1>
+                        <span>LOGÍSTICA CLÍNICA</span>
+                    </div>
+                </div>
 
+                <!-- O Botão de nova solicitação (Lá no topo da Sidebar) -->
+                <button class="btn-new-request" onclick="window.location.href='solicitacoes.html'">
+                    <i class="fa-solid fa-plus"></i> Nova Solicitação
+                </button>
 
-    <main>
+                <nav class="main-menu">
+                    <a href="index.html" class="menu-item active"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                    <a href="solicitacoes.html" class="menu-item"><i
+                            class="fa-regular fa-clipboard"></i>Solicitações</a>
+                    <a href="documentos.html" class="menu-item"><i class="fa-solid fa-file-medical"></i> Documentos</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-gavel"></i> Auditoria</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-box-open"></i> Materiais</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-truck"></i> Fornecedores</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
+                </nav>
+            </div>
 
-        <section class="card">
+            <div class="sidebar-bottom">
+                <a href="#" class="menu-item"><i class="fa-regular fa-circle-question"></i> Ajuda</a>
+                <a href="#" class="menu-item sign-out"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
+            </div>
+        </aside>
 
-            <h2>Novo Documento</h2>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar solicitações, materiais ou cirurgiões...">
+                </div>
 
-            <input id="nome" type="text" placeholder="Nome do documento">
+                <div class="topbar-actions">
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fa-regular fa-circle-question"></i></button>
+                    <button class="icon-btn"><i class="fa-solid fa-grip"></i></button>
 
-            <input id="categoria" type="text" placeholder="Categoria">
+                    <div class="user-profile">
+                        <div class="user-info text-right">
+                            <strong>Dra. Sarah Jenkins</strong>
+                            <span>Registradora Chefe</span>
+                        </div>
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Dra. Sarah Jenkins">
+                    </div>
+                </div>
+            </header>
 
-            <input id="descricao" type="text" placeholder="Descrição">
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Header section -->
+                <div class="page-header">
+                    <div class="header-titles">
+                        <h2>Visão Geral do Sistema</h2>
+                        <p>Status em tempo real da logística de Órteses, Próteses e Materiais Especiais.</p>
+                    </div>
+                    <div class="header-buttons">
+                        <button class="btn-outline"><i class="fa-regular fa-calendar"></i> 01 OUT - 31 OUT,
+                            2023</button>
+                        <button class="btn-primary"><i class="fa-solid fa-download"></i> Exportar PDF</button>
+                    </div>
+                </div>
 
-            <input id="validade" type="date">
+                <!-- KPI Cards Row -->
+                <div class="kpi-grid">
+                    <!-- Card 1 -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <div class="kpi-title">SOLICITAÇÕES PENDENTES</div>
+                            <div class="kpi-icon blue"><i class="fa-regular fa-clipboard"></i></div>
+                        </div>
+                        <div class="kpi-value">
+                            <h3 id="kpi-pendentes">...</h3>
+                            <span class="trend down"><i class="fa-solid fa-arrow-trend-down"></i> -12%</span>
+                        </div>
+                        <div class="kpi-bottom">
+                            <span class="text-muted">Próxima atualização em 15m</span>
+                            <a href="#">Ver Tudo</a>
+                        </div>
+                    </div>
 
-            <select id="status">
-                <option value="Ativo">Ativo</option>
-                <option value="Vencido">Vencido</option>
-            </select>
+                    <!-- Card 2 -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <div class="kpi-title">APROVADAS/NEGADAS</div>
+                            <div class="kpi-icon green"><i class="fa-regular fa-circle-check"></i></div>
+                        </div>
+                        <div class="kpi-value">
+                            <h3 id="kpi-concluidas">...</h3>
+                            <span class="trend up"><i class="fa-solid fa-arrow-trend-up"></i> +8%</span>
+                        </div>
+                        <div class="kpi-progress-area">
+                            <div class="progress-bar-wrap">
+                                <div class="progress-green" style="width: 85%;"></div>
+                                <div class="progress-red" style="width: 15%;"></div>
+                            </div>
+                            <div class="progress-labels">
+                                <span>85% APROVADAS</span>
+                                <span>15% NEGADAS</span>
+                            </div>
+                        </div>
+                    </div>
 
-            <button id="botao-salvar" onclick="salvarDocumento()">
-                Cadastrar
-            </button>
+                    <!-- Card 3 -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <div class="kpi-title">CIRURGIAS URGENTES</div>
+                            <div class="kpi-icon red"><i class="fa-solid fa-exclamation-triangle"></i></div>
+                        </div>
+                        <div class="kpi-value">
+                            <h3>05</h3>
+                            <span class="text-muted text-sm ml-2">Nas próximas 24h</span>
+                        </div>
+                        <div class="avatar-group">
+                            <div class="avatar"><img src="https://i.pravatar.cc/100?img=11" alt="Cirurgião"></div>
+                            <div class="avatar"><img src="https://i.pravatar.cc/100?img=12" alt="Cirurgião"></div>
+                            <div class="avatar more">+3</div>
+                        </div>
+                    </div>
 
-        </section>
+                    <!-- Card 4 -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <div class="kpi-title">TEMPO MÉDIO DE APROVAÇÃO</div>
+                            <div class="kpi-icon orange"><i class="fa-solid fa-stopwatch"></i></div>
+                        </div>
+                        <div class="kpi-value">
+                            <h3>3.2<span>h</span></h3>
+                            <span class="trend up"><i class="fa-solid fa-arrow-trend-down"></i> -1.4h</span>
+                        </div>
+                        <div class="kpi-bottom text-muted">
+                            Meta: < 4.0h </div>
+                        </div>
+                    </div>
 
+                    <!-- Main Grid Layout (Chart + Alerts) -->
+                    <div class="dashboard-grid">
 
-        <section class="card">
+                        <!-- Left Column: Chart -->
+                        <div class="chart-section card">
+                            <div class="chart-header">
+                                <h3>Tendências de Gastos Mensais</h3>
+                                <div class="chart-legend">
+                                    <span><i class="fa-solid fa-circle color-ortese"></i> Órteses</span>
+                                    <span><i class="fa-solid fa-circle color-protese"></i> Próteses</span>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <!-- Gráfico feito com CSS Flexbox -->
+                                <div class="css-chart">
+                                    <div class="bar-group">
+                                        <div class="bar bar-light" style="height: 15%;"></div>
+                                        <div class="bar bar-mid" style="height: 25%;"></div>
+                                        <div class="bar bar-dark" style="height: 20%;"></div>
+                                        <span class="bar-label">JAN</span>
+                                    </div>
+                                    <div class="bar-group">
+                                        <div class="bar bar-light" style="height: 0%;"></div>
+                                        <div class="bar bar-mid" style="height: 35%;"></div>
+                                        <div class="bar bar-dark" style="height: 40%;"></div>
+                                        <span class="bar-label">FEV</span>
+                                    </div>
+                                    <div class="bar-group">
+                                        <div class="bar bar-light" style="height: 20%;"></div>
+                                        <div class="bar bar-mid" style="height: 20%;"></div>
+                                        <div class="bar bar-dark" style="height: 25%;"></div>
+                                        <span class="bar-label">MAR</span>
+                                    </div>
+                                    <div class="bar-group">
+                                        <div class="bar bar-light" style="height: 25%;"></div>
+                                        <div class="bar bar-mid" style="height: 15%;"></div>
+                                        <div class="bar bar-dark" style="height: 45%;"></div>
+                                        <span class="bar-label">ABR</span>
+                                    </div>
+                                    <div class="bar-group">
+                                        <div class="bar bar-light" style="height: 10%;"></div>
+                                        <div class="bar bar-mid" style="height: 20%;"></div>
+                                        <div class="bar bar-dark" style="height: 40%;"></div>
+                                        <span class="bar-label">MAI</span>
+                                    </div>
+                                    <div class="bar-group">
+                                        <div class="bar bar-light" style="height: 0%;"></div>
+                                        <div class="bar bar-mid" style="height: 30%;"></div>
+                                        <div class="bar bar-dark" style="height: 60%;"></div>
+                                        <span class="bar-label">JUN</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-footer">
+                                <div class="financial-summary">
+                                    <span>Total Projetado: <strong>$240.500,00</strong></span>
+                                    <span>Orçamento Disponível: <strong class="color-blue">$850.000,00</strong></span>
+                                </div>
+                                <a href="#" class="link-download">Baixar Detalhes</a>
+                            </div>
+                        </div>
 
-            <h2>Documentos cadastrados</h2>
+                        <!-- Right Column: Alerts and Quick Links -->
+                        <div class="side-widgets">
+                            <!-- Alertas Críticos -->
+                            <div class="card alerts-card">
+                                <div class="card-header border-none pb-0">
+                                    <h3>Alertas Críticos</h3>
+                                    <span class="badge badge-red-solid">03</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="alert-item red">
+                                        <div class="alert-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+                                        <div class="alert-content">
+                                            <strong>Doc. de Esterilização Ausente</strong>
+                                            <span>Caso #9021 - Haste Femoral de Titânio</span>
+                                        </div>
+                                    </div>
+                                    <div class="alert-item yellow">
+                                        <div class="alert-icon"><i class="fa-solid fa-ellipsis"></i></div>
+                                        <div class="alert-content">
+                                            <strong>Auditoria Solicitada</strong>
+                                            <span>Nota Fiscal #4402 - MedTech Supply Co.</span>
+                                        </div>
+                                    </div>
+                                    <div class="alert-item blue">
+                                        <div class="alert-icon"><i class="fa-solid fa-circle-info"></i></div>
+                                        <div class="alert-content">
+                                            <strong>Nova Atualização de Protocolo</strong>
+                                            <span>Diretrizes Clínicas V3.4 lançadas.</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn-block-outline">Ver Histórico Completo</button>
+                                </div>
+                            </div>
 
-            <table>
-            
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Categoria</th>
-                        <th>Status</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-            
-                <tbody id="tabela-documentos">
-                
-                </tbody>
-            
-            </table>
+                            <!-- Botões Rápidos -->
+                            <div class="quick-links-grid">
+                                <div class="card quick-link-card">
+                                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                                    <span>Minhas Solicit.</span>
+                                </div>
+                                <div class="card quick-link-card">
+                                    <i class="fa-solid fa-list-check"></i>
+                                    <span>Aprovações</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        </section>
+                    <!-- Table Section -->
+                    <div class="card table-card">
+                        <div class="table-header">
+                            <h3>Fila de Suprimentos Ativa</h3>
+                            <div class="filter-tabs">
+                                <button class="tab active">Todos os Casos</button>
+                                <button class="tab">Pendentes</button>
+                                <button class="tab">Aprovados</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID DA SOLICITAÇÃO</th>
+                                        <th>CIRURGIÃO</th>
+                                        <th>MATERIAL / PROCEDIMENTO</th>
+                                        <th>STATUS</th>
+                                        <th>DATA DE ENTREGA</th>
+                                        <th>VALOR</th>
+                                        <th>AÇÕES</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabela-solicitacoes">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="table-footer">
+                        <span class="text-muted text-sm">Mostrando 3 de 128 itens</span>
+                        <div class="pagination">
+                            <button class="page-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
 
-    </main>
+            </div>
+        </main>
 
+        <!-- Floating Action Button -->
+        <button class="fab-btn">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>
 
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 
 </html>
