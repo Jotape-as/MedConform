@@ -16,6 +16,11 @@ class Solicitacao(db.Model):
     status = db.Column(db.String(50), default="Aguardando Auditoria")
     data_criacao = db.Column(db.DateTime, default=datetime.utcnow)
 
+    # --- NOVOS CAMPOS PARA COTAÇÃO E MATERIAIS OPME ---
+    materiais_solicitados = db.Column(db.Text, nullable=True)
+    valor_total = db.Column(db.Float, nullable=True)
+    fornecedor_vencedor = db.Column(db.String(150), nullable=True)
+
     # --- Métodos de Persistência Obrigatórios ---
     def salvar(self):
         db.session.add(self)

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,172 +12,231 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
 
-<div class="app-container">
-    <!-- Sidebar Padronizada -->
-    <aside class="sidebar">
-        <div class="sidebar-top">
-            <div class="logo-area">
-                <div class="logo-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
-                <div class="logo-text">
-                    <h1>Medconform</h1>
-                    <span>LOGÍSTICA CLÍNICA</span>
-                </div>
-            </div>
-            
-            <button class="btn-new-request" onclick="window.location.href='solicitacoes.html'">
-                <i class="fa-solid fa-plus"></i> Nova Solicitação
-            </button>
-
-            <nav class="main-menu">
-                <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
-                <a href="solicitacoes.html" class="menu-item active"><i class="fa-regular fa-clipboard"></i> Solicitações</a>
-                <a href="documentos.html" class="menu-item"><i class="fa-solid fa-file-medical"></i> Documentos</a>
-                <a href="#" class="menu-item"><i class="fa-solid fa-gavel"></i> Auditoria</a>
-                <a href="#" class="menu-item"><i class="fa-solid fa-box-open"></i> Materiais</a>
-                <a href="#" class="menu-item"><i class="fa-solid fa-truck"></i> Fornecedores</a>
-                <a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
-                <a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
-            </nav>
-        </div>
-
-        <div class="sidebar-bottom">
-            <a href="#" class="menu-item"><i class="fa-regular fa-circle-question"></i> Ajuda</a>
-            <a href="#" class="menu-item sign-out"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
-        </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Topbar Padronizada -->
-        <header class="topbar">
-            <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Buscar solicitações, materiais ou cirurgiões...">
-            </div>
-            
-            <div class="topbar-actions">
-                <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
-                <button class="icon-btn"><i class="fa-regular fa-circle-question"></i></button>
-                <button class="icon-btn"><i class="fa-solid fa-grip"></i></button>
-                
-                <div class="user-profile">
-                    <div class="user-info text-right">
-                        <strong>Dra. Sarah Jenkins</strong>
-                        <span>Registradora Chefe</span>
-                    </div>
-                    <img src="https://i.pravatar.cc/150?img=5" alt="Dra. Sarah Jenkins">
-                </div>
-            </div>
-        </header>
-
-        <!-- Page Content -->
-        <div class="page-content">
-            
-            <!-- Cabeçalho da Página com os Botões de Ação -->
-            <div class="page-header mb-25">
-                <div class="header-titles">
-                    <h2>Nova Solicitação de OPME</h2>
-                    <p>Forneça os detalhes clínicos para a autorização de materiais especiais.</p>
-                </div>
-                <div class="header-buttons">
-                    <button class="btn-outline">SALVAR RASCUNHO</button>
-                    <!-- BOTÃO QUE DISPARA O JAVASCRIPT -->
-                    <button class="btn-fill" id="btn-enviar">ENVIAR PARA AUDITORIA</button> 
-                </div>
-            </div>
-
-            <!-- Container Flex para manter as duas colunas do seu formulário -->
-            <div class="form-layout">
-                
-                <!-- Coluna Principal (Formulário) -->
-                <div class="form-main">
-                    <!-- Card 1 -->
-                    <div class="card mb-20">
-                        <div class="card-header">
-                            <h3><i class="fa-regular fa-user"></i> Paciente e Médico</h3>
-                        </div>
-                        <div class="form-grid-2">
-                            <div class="form-group">
-                                <label>Nome Completo do Paciente</label>
-                                <input type="text" class="form-control" id="nome_paciente" placeholder="Ex: Sarah Connor">
-                            </div>
-                            <div class="form-group">
-                                <label>ID / Registro do Paciente</label>
-                                <input type="text" class="form-control" id="registro_paciente" placeholder="000.000.000-00">
-                            </div>
-                        </div>
-                        <div class="form-group mb-15">
-                            <label>Convênio / Plano de Saúde</label>
-                            <select class="form-control" id="convenio">
-                                <option value="">Selecione o plano...</option>
-                                <option value="Unimed">Unimed</option>
-                                <option value="Bradesco Saude">Bradesco Saúde</option>
-                                <option value="SulAmerica">SulAmérica</option>
-                            </select>
-                        </div>
-                        <div class="form-grid-2">
-                            <div class="form-group">
-                                <label>Médico Solicitante</label>
-                                <input type="text" class="form-control" id="medico_solicitante" value="Dr. Julian Vance" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label>CRM / Número de Registro</label>
-                                <input type="text" class="form-control" id="crm" value="123456-NY" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="card">
-                        <div class="card-header card-header-flex">
-                            <h3><i class="fa-solid fa-notes-medical"></i> Detalhes do Procedimento</h3>
-                            <span class="badge-urgencia">URGÊNCIA: ALTA</span>
-                        </div>
-                        <div class="form-grid-2">
-                            <div class="form-group">
-                                <label>Procedimento Cirúrgico</label>
-                                <input type="text" class="form-control" id="procedimento" placeholder="Ex: Artroplastia Total de Quadril">
-                            </div>
-                            <div class="form-group">
-                                <label>Data Agendada</label>
-                                <input type="date" class="form-control" id="data_agendada">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Justificativa Médica</label>
-                            <textarea class="form-control" id="justificativa" placeholder="Descreva a necessidade clínica para os materiais escolhidos..."></textarea>
-                        </div>
+    <div class="app-container">
+        <!-- Sidebar Padronizada -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="logo-area">
+                    <div class="logo-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
+                    <div class="logo-text">
+                        <h1>Medconform</h1>
+                        <span>LOGÍSTICA CLÍNICA</span>
                     </div>
                 </div>
 
-                <!-- Coluna Lateral -->
-                <div class="form-sidebar">
-                    <!-- Widget de Anexos -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3><i class="fa-solid fa-paperclip"></i> Anexos</h3>
-                        </div>
-                        <div class="upload-box">
-                            <i class="fa-solid fa-cloud-arrow-up"></i>
-                            <h4>Arraste exames aqui</h4>
-                            <p>PDF, JPG ATÉ 10MB</p>
-                            <button class="btn-outline btn-full">Procurar Arquivos</button>
-                        </div>
-                    </div>
+                <button id="btn-nova-solicitacao" class="btn-new-request"
+                    onclick="window.location.href='solicitacoes.html'">
+                    <i class="fa-solid fa-plus"></i> Nova Solicitação
+                </button>
 
-                    <!-- Widget Dica Rápida -->
-                    <div class="card info-card">
-                        <h3>Dica Rápida</h3>
-                        <p>Adicionar a documentação de planejamento cirúrgico pode acelerar o processo de auditoria em até 48 horas.</p>
+                <nav class="main-menu">
+                    <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                    <a href="solicitacoes.html" class="menu-item active"><i class="fa-regular fa-clipboard"></i>
+                        Solicitações</a>
+                    <a href="documentos.html" class="menu-item"><i class="fa-solid fa-file-medical"></i> Documentos</a>
+                    <a href="auditoria.html" id="menu-auditoria" class="menu-item"><i class="fa-solid fa-gavel"></i>
+                        Auditoria</a>
+                    <a href="materiais.html" class="menu-item"><i class="fa-solid fa-box-open"></i> Materiais</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-truck"></i> Fornecedores</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
+                </nav>
+            </div>
+
+            <div class="sidebar-bottom">
+                <a href="#" class="menu-item"><i class="fa-regular fa-circle-question"></i> Ajuda</a>
+                <a href="#" id="btn-logout" class="menu-item sign-out"><i
+                        class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar Padronizada -->
+            <header class="topbar">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar solicitações, materiais ou cirurgiões...">
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fa-regular fa-circle-question"></i></button>
+                    <button class="icon-btn"><i class="fa-solid fa-grip"></i></button>
+
+                    <div class="user-profile">
+                        <div class="user-info text-right">
+                            <strong id="user-name-display">Carregando...</strong>
+                            <span id="user-role-display">Aguarde...</span>
+                        </div>
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Foto de Perfil">
                     </div>
                 </div>
-            </div>
-        </div>
-    </main>
-</div>
+            </header>
 
-<script src="script.js"></script>
+            <!-- Page Content -->
+            <div class="page-content">
+
+                <!-- Cabeçalho da Página com os Botões de Ação -->
+                <div class="page-header mb-25">
+                    <div class="header-titles">
+                        <h2>Nova Solicitação de OPME</h2>
+                        <p>Forneça os detalhes clínicos para a autorização de materiais especiais.</p>
+                    </div>
+                    <div class="header-buttons">
+                        <button class="btn-outline">SALVAR RASCUNHO</button>
+                        <!-- BOTÃO QUE DISPARA O JAVASCRIPT -->
+                        <button class="btn-fill" id="btn-enviar">ENVIAR PARA AUDITORIA</button>
+                    </div>
+                </div>
+
+                <div class="form-layout">
+                    <!-- COLUNA PRINCIPAL (Esquerda) -->
+                    <div class="form-main">
+
+                        <!-- Card 1: Paciente e Médico -->
+                        <div class="card mb-20">
+                            <div class="card-header">
+                                <h3><i class="fa-regular fa-user"></i> Paciente e Médico</h3>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label>Nome Completo do Paciente</label>
+                                    <input type="text" class="form-control" id="nome_paciente"
+                                        placeholder="Ex: Sarah Connor">
+                                </div>
+                                <div class="form-group">
+                                    <label>ID / Registro do Paciente</label>
+                                    <input type="text" class="form-control" id="registro_paciente"
+                                        placeholder="000.000.000-00">
+                                </div>
+                            </div>
+                            <div class="form-group mb-15">
+                                <label>Convênio / Plano de Saúde</label>
+                                <select class="form-control" id="convenio">
+                                    <option value="">Selecione o plano...</option>
+                                    <option value="Unimed">Unimed</option>
+                                    <option value="Bradesco Saude">Bradesco Saúde</option>
+                                    <option value="SulAmerica">SulAmérica</option>
+                                </select>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label>Médico Solicitante</label>
+                                    <input type="text" class="form-control" id="medico_solicitante"
+                                        value="Dr. Julian Vance" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>CRM / Número de Registro</label>
+                                    <input type="text" class="form-control" id="crm" value="123456-NY" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Detalhes do Procedimento -->
+                        <div class="card mb-20">
+                            <div class="card-header card-header-flex">
+                                <h3><i class="fa-solid fa-notes-medical"></i> Detalhes do Procedimento</h3>
+                                <span class="badge-urgencia">URGÊNCIA: ALTA</span>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label>Procedimento Cirúrgico</label>
+                                    <input type="text" class="form-control" id="procedimento"
+                                        placeholder="Ex: Artroplastia Total de Quadril">
+                                </div>
+                                <div class="form-group">
+                                    <label>Data Agendada</label>
+                                    <input type="date" class="form-control" id="data_agendada">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Justificativa Médica</label>
+                                <textarea class="form-control" id="justificativa"
+                                    placeholder="Descreva a necessidade clínica para os materiais escolhidos..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- NOVO CARD 3: MATERIAIS OPME -->
+                        <!-- NOVO CARD 3: MATERIAIS OPME -->
+                        <div class="card mb-20">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-box-open"></i> Materiais OPME Solicitados</h3>
+                            </div>
+
+                            <div class="card-body-opme">
+                                <div id="lista-materiais">
+                                    <div class="linha-material">
+                                        <div class="form-group material-nome">
+                                            <select id="sol-materiais" name="nome_material[]" class="form-control"
+                                                required>
+                                                <option value="">Carregando catálogo oficial...</option>
+                                            </select>
+                                            <small class="aviso-catalogo">
+                                                *Apenas itens padronizados e com preço teto aprovado pela logística
+                                                estão disponíveis.
+                                            </small>
+                                        </div>
+                                        <div class="form-group material-qtd">
+                                            <input type="number" name="quantidade_material[]" class="form-control"
+                                                placeholder="Qtd" min="1" value="1" required>
+                                        </div>
+                                        <button type="button" class="btn-remover-material"
+                                            onclick="removerMaterial(this)" title="Remover item">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn-outline mt-15" onclick="adicionarMaterial()">
+                                    <i class="fa-solid fa-plus"></i> Adicionar Material
+                                </button>
+                            </div>
+                        </div>
+
+                    </div> <!-- FIM DA COLUNA PRINCIPAL (form-main) -->
+
+                    <!-- COLUNA LATERAL (Direita) -->
+                    <div class="form-sidebar">
+
+                        <!-- Widget de Anexos -->
+                        <div class="card mb-20">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-paperclip"></i> Anexos</h3>
+                            </div>
+                            <div class="upload-box" onclick="document.getElementById('input-arquivo-exame').click()">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <h4>Arraste exames aqui</h4>
+                                <p>PDF, JPG ATÉ 10MB</p>
+                                <button type="button" class="btn-outline btn-full">Procurar Arquivos</button>
+                                <input type="file" id="input-arquivo-exame" class="input-arquivo-oculto"
+                                    accept=".pdf, .jpg, .jpeg, .png" onchange="mostrarNomeArquivo(this)">
+                                <div id="container-arquivo-selecionado" class="arquivo-anexado-box">
+                                    <span id="nome-arquivo-selecionado" class="arquivo-anexado-texto"></span>
+                                    <button type="button" class="btn-remover-arquivo"
+                                        onclick="removerArquivoAnexado(event)" title="Remover arquivo">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Widget Dica Rápida -->
+                        <div class="card info-card">
+                            <h3>Dica Rápida</h3>
+                            <p>Adicionar a documentação de planeamento cirúrgico pode acelerar o processo de auditoria
+                                em até 48 horas.</p>
+                        </div>
+
+                    </div> <!-- FIM DA COLUNA LATERAL (form-sidebar) -->
+                </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>

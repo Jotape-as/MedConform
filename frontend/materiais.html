@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medconform - Catálogo de Materiais</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar (Menu Lateral) -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="logo-area">
+                    <div class="logo-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
+                    <div class="logo-text">
+                        <h1>Medconform</h1>
+                        <span>LOGÍSTICA CLÍNICA</span>
+                    </div>
+                </div>
+                <button id="btn-nova-solicitacao" class="btn-new-request"
+                    onclick="window.location.href='solicitacoes.html'">
+                    <i class="fa-solid fa-plus"></i> Nova Solicitação
+                </button>
+                <nav class="main-menu">
+                    <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                    <a href="solicitacoes.html" class="menu-item"><i
+                            class="fa-regular fa-clipboard"></i>Solicitações</a>
+                    <a href="documentos.html" class="menu-item"><i class="fa-solid fa-file-medical"></i> Documentos</a>
+                    <a href="auditoria.html" id="menu-auditoria" class="menu-item"><i class="fa-solid fa-gavel"></i>
+                        Auditoria</a> <!-- 👇 Materiais está ativo 👇 -->
+                    <a href="materiais.html" class="menu-item active"><i class="fa-solid fa-box-open"></i> Materiais</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-truck"></i> Fornecedores</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                <a href="#" id="btn-logout" class="menu-item sign-out"><i
+                        class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="header-titles">
+                        <h2>Catálogo de OPME</h2>
+                        <p>Gestão de órteses, próteses e materiais especiais para o motor de cotações.</p>
+                    </div>
+                    <div class="header-buttons">
+                        <button class="btn-primary" onclick="abrirModalMaterial()">
+                            <i class="fa-solid fa-plus"></i> Novo Material
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabela de Materiais -->
+                <div class="card table-card mt-20">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>CÓDIGO ANVISA</th>
+                                    <th>NOME DO MATERIAL</th>
+                                    <th>CATEGORIA</th>
+                                    <th>FABRICANTE</th>
+                                    <th>PREÇO BASE</th>
+                                    <th>AÇÕES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-materiais">
+                                <!-- O JavaScript vai injetar as linhas aqui -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Adicionar Novo Material -->
+    <div id="modal-material" class="modal-overlay oculto">
+        <div class="modal-content card modal-compacto">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-box-open"></i> Cadastrar Material</h3>
+                <button class="btn-close" onclick="fecharModalMaterial()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body mt-15">
+                <form id="form-material" onsubmit="salvarMaterial(event)">
+                    <!-- Campo de Nome com Botão de Busca -->
+                    <div class="form-group">
+                        <label>Nome do Material</label>
+                        <div class="grupo-busca">
+                            <input type="text" id="mat-nome" class="form-control" required
+                                placeholder="Ex: Haste Femoral de Titânio">
+                            <button type="button" class="btn-primary btn-cotacao" onclick="buscarDadosMercado(event)">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Buscar Cotação
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-10">
+                        <label>Código ANVISA</label>
+                        <input type="text" id="mat-anvisa" class="form-control" required
+                            placeholder="Preenchimento automático">
+                    </div>
+                    <div class="form-group mt-10">
+                        <label>Categoria</label>
+                        <select id="mat-categoria" class="form-control" required>
+                            <option value="">Selecione a categoria...</option>
+                            <option value="Órtese">Órtese</option>
+                            <option value="Prótese">Prótese</option>
+                            <option value="Material Especial">Material Especial</option>
+                        </select>
+                    </div>
+
+                    <!-- Campos Bloqueados contra Fraude (readonly) -->
+                    <div class="form-group mt-10">
+                        <label><i class="fa-solid fa-lock icone-bloqueado"></i> Fabricante (Menor Preço
+                            Encontrado)</label>
+                        <input type="text" id="mat-fabricante" class="form-control campo-bloqueado" required readonly
+                            placeholder="Bloqueado pelo Sistema">
+                    </div>
+                    <div class="form-group mt-10">
+                        <label><i class="fa-solid fa-lock icone-bloqueado"></i> Preço Base de Referência (R$)</label>
+                        <input type="number" step="0.01" id="mat-preco" class="form-control campo-bloqueado" required
+                            readonly placeholder="Bloqueado pelo Sistema">
+                    </div>
+
+                    <div class="form-actions mt-20 actions-right">
+                        <button type="button" class="btn-outline" onclick="fecharModalMaterial()">Cancelar</button>
+                        <button type="submit" class="btn-primary">Salvar no Catálogo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src="script.js"></script>
+</body>
+
+</html>

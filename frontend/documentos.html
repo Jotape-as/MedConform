@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,131 +11,138 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-<div class="app-container">
-    <aside class="sidebar">
-        <div class="sidebar-top">
-            <div class="logo-area">
-                <div class="logo-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
-                <div class="logo-text">
-                    <h1>Medconform</h1>
-                    <span>LOGÍSTICA CLÍNICA</span>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="logo-area">
+                    <div class="logo-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
+                    <div class="logo-text">
+                        <h1>Medconform</h1>
+                        <span>LOGÍSTICA CLÍNICA</span>
+                    </div>
                 </div>
+                <button id="btn-nova-solicitacao" class="btn-new-request"
+                    onclick="window.location.href='solicitacoes.html'">
+                    <i class="fa-solid fa-plus"></i> Nova Solicitação
+                </button>
+                <nav class="main-menu">
+                    <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                    <a href="solicitacoes.html" class="menu-item"><i class="fa-regular fa-clipboard"></i>
+                        Solicitações</a>
+                    <a href="documentos.html" class="menu-item active"><i class="fa-solid fa-file-medical"></i>
+                        Documentos</a>
+                    <a href="auditoria.html" id="menu-auditoria" class="menu-item"><i class="fa-solid fa-gavel"></i>
+                        Auditoria</a>
+                    <a href="materiais.html" class="menu-item"><i class="fa-solid fa-box-open"></i> Materiais</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-truck"></i> Fornecedores</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
+                </nav>
             </div>
-            <button class="btn-new-request" onclick="window.location.href='solicitacoes.html'">
-                <i class="fa-solid fa-plus"></i> Nova Solicitação
-            </button>
-            <nav class="main-menu">
-                <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
-                <a href="solicitacoes.html" class="menu-item"><i class="fa-regular fa-clipboard"></i> Solicitações</a>
-                <a href="documentos.html" class="menu-item active"><i class="fa-solid fa-file-medical"></i> Documentos</a>
-                <a href="#" class="menu-item"><i class="fa-solid fa-gavel"></i> Auditoria</a>
-                <a href="#" class="menu-item"><i class="fa-solid fa-box-open"></i> Materiais</a>
-                <a href="#" class="menu-item"><i class="fa-solid fa-truck"></i> Fornecedores</a>
-                <a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
-                <a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
-            </nav>
-        </div>
-        <div class="sidebar-bottom">
-            <a href="#" class="menu-item"><i class="fa-regular fa-circle-question"></i> Ajuda</a>
-            <a href="#" class="menu-item sign-out"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
-        </div>
-    </aside>
+            <div class="sidebar-bottom">
+                <a href="#" class="menu-item"><i class="fa-regular fa-circle-question"></i> Ajuda</a>
+                <a href="#" id="btn-logout" class="menu-item sign-out"><i
+                        class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
+            </div>
+        </aside>
 
-    <main class="main-content">
-        <header class="topbar">
-            <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Buscar solicitações, materiais ou cirurgiões...">
-            </div>
-            <div class="topbar-actions">
-                <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
-                <button class="icon-btn"><i class="fa-regular fa-circle-question"></i></button>
-                <button class="icon-btn"><i class="fa-solid fa-grip"></i></button>
-                <div class="user-profile">
-                    <div class="user-info text-right">
-                        <strong>Dra. Sarah Jenkins</strong>
-                        <span>Registradora Chefe</span>
-                    </div>
-                    <img src="https://i.pravatar.cc/150?img=5" alt="Dra. Sarah Jenkins">
+        <main class="main-content">
+            <header class="topbar">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar solicitações, materiais ou cirurgiões...">
                 </div>
-            </div>
-        </header>
+                <div class="topbar-actions">
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fa-regular fa-circle-question"></i></button>
+                    <button class="icon-btn"><i class="fa-solid fa-grip"></i></button>
+                    <div class="user-profile">
+                        <div class="user-info text-right">
+                            <strong id="user-name-display">Carregando...</strong>
+                            <span id="user-role-display">Aguarde...</span>
+                        </div>
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Foto de Perfil">
+                    </div>
+                </div>
+            </header>
 
-        <div class="page-content">
-            <div class="page-header mb-25">
-                <div class="header-titles">
-                    <h2>Gestão de Documentos Clínicos</h2>
-                    <p>Gerencie laudos, guias e certificados de esterilização.</p>
+            <div class="page-content">
+                <div class="page-header mb-25">
+                    <div class="header-titles">
+                        <h2>Gestão de Documentos Clínicos</h2>
+                        <p>Gerencie laudos, guias e certificados de esterilização.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card mb-20">
-                <div class="card-header">
-                    <h3>Anexar Novo Documento</h3>
-                </div>
-                <div class="form-grid-2">
-                    <div class="form-group">
-                        <label>Nome do Documento</label>
-                        <input type="text" id="nome" class="form-control" placeholder="Ex: Laudo de Ressonância">
+                <div class="card mb-20">
+                    <div class="card-header">
+                        <h3>Anexar Novo Documento</h3>
+                    </div>
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label>Nome do Documento</label>
+                            <input type="text" id="nome" class="form-control" placeholder="Ex: Laudo de Ressonância">
+                        </div>
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select id="categoria" class="form-control">
+                                <option value="Exame de Imagem">Exame de Imagem</option>
+                                <option value="Guia de Convênio">Guia de Convênio</option>
+                                <option value="Laudo Médico">Laudo Médico</option>
+                                <option value="Certificado">Certificado de Esterilização</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label>Data de Validade</label>
+                            <input type="date" id="validade" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="status" class="form-control">
+                                <option value="Ativo">Ativo</option>
+                                <option value="Vencido">Vencido</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Categoria</label>
-                        <select id="categoria" class="form-control">
-                            <option value="Exame de Imagem">Exame de Imagem</option>
-                            <option value="Guia de Convênio">Guia de Convênio</option>
-                            <option value="Laudo Médico">Laudo Médico</option>
-                            <option value="Certificado">Certificado de Esterilização</option>
-                        </select>
+                        <label>Descrição Opcional</label>
+                        <textarea id="descricao" class="form-control" placeholder="Detalhes adicionais..."></textarea>
+                    </div>
+                    <div class="text-right mt-15">
+                        <button class="btn-fill" id="botao-salvar" onclick="salvarDocumento()">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> SALVAR DOCUMENTO
+                        </button>
                     </div>
                 </div>
-                <div class="form-grid-2">
-                    <div class="form-group">
-                        <label>Data de Validade</label>
-                        <input type="date" id="validade" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Status</label>
-                        <select id="status" class="form-control">
-                            <option value="Ativo">Ativo</option>
-                            <option value="Vencido">Vencido</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Descrição Opcional</label>
-                    <textarea id="descricao" class="form-control" placeholder="Detalhes adicionais..."></textarea>
-                </div>
-                <div class="text-right mt-15">
-                    <button class="btn-fill" id="botao-salvar" onclick="salvarDocumento()">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> SALVAR DOCUMENTO
-                    </button>
-                </div>
-            </div>
 
-            <div class="card table-card">
-                <div class="table-header">
-                    <h3>Arquivos Anexados</h3>
-                </div>
-                <div class="table-responsive">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>NOME DO ARQUIVO</th>
-                                <th>CATEGORIA</th>
-                                <th>STATUS</th>
-                                <th>AÇÕES</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabela-documentos">
-                        </tbody>
-                    </table>
+                <div class="card table-card">
+                    <div class="table-header">
+                        <h3>Arquivos Anexados</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NOME DO ARQUIVO</th>
+                                    <th>CATEGORIA</th>
+                                    <th>STATUS</th>
+                                    <th>AÇÕES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-documentos">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
-</div>
-<script src="script.js"></script>
+        </main>
+    </div>
+    <script src="script.js"></script>
 </body>
+
 </html>

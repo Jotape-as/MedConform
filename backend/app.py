@@ -4,11 +4,15 @@ from database.database import db
 
 from models.documento import Documento
 from models.solicitacao import Solicitacao
+from models.usuario import Usuario
 from controllers.solicitacao_controller import SolicitacaoController
-from controllers.documento_controller import DocumentoController 
+from controllers.documento_controller import DocumentoController
+from controllers.material_controller import MaterialController 
+from flask import Flask, request, jsonify, session
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app)
+app.secret_key = 'chave_super_secreta_medconform' # Necessário para o session funcionar
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///medconform.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -69,6 +73,78 @@ def atualizar_documento(id):
     controller = DocumentoController()
     return controller.atualizar(id, request)
 
+@app.route('/api/solicitacoes/pendentes', methods=['GET'])
+def listar_pendentes():
+    controller = SolicitacaoController()
+    return controller.listar_pendentes()
+
+@app.route('/api/solicitacoes/<int:id>/parecer', methods=['POST'])
+def emitir_parecer(id):
+    controller = SolicitacaoController()
+    return controller.emitir_parecer(id, request)
+
+@app.route('/api/solicitacoes/<int:id>/analise-ia', methods=['GET'])
+def analisar_com_ia(id):
+    controller = SolicitacaoController()
+    return controller.analisar_com_ia(id)
+
+material_controller = MaterialController()
+
+@app.route('/api/materiais', methods=['GET'])
+def listar_materiais():
+    return material_controller.listar()
+
+# 2. Rota para Criar um novo material
+@app.route('/api/materiais', methods=['POST'])
+def criar_material():
+    return material_controller.criar(request)
+
+# 3. Rota para Cotação Inteligente de Mercado
+@app.route('/api/materiais/cotacao-automatica', methods=['POST'])
+def cotacao_automatica():
+    return material_controller.cotacao_automatica(request)
+
+# 4. Rota para Excluir um material
+@app.route('/api/materiais/<int:material_id>', methods=['DELETE'])
+def excluir_material(material_id):
+    return material_controller.excluir(material_id)
+
+@app.route('/api/login', methods=['POST'])
+def login():
+    dados = request.get_json()
+    email = dados.get('email')
+    senha = dados.get('senha')
+
+    # Procura o utilizador na base de dados
+    user = Usuario.query.filter_by(email=email, senha=senha).first()
+
+    if user:
+        # Guarda as informações na sessão do servidor!
+        session['user_id'] = user.id
+        session['perfil'] = user.perfil
+        session['nome'] = user.nome
+
+        return jsonify({"mensagem": "Login efetuado com sucesso!", "usuario": user.to_dict()}), 200
+    else:
+        return jsonify({"erro": "Email ou senha incorretos."}), 401
+
+@app.route('/api/usuario/atual', methods=['GET'])
+def usuario_atual():
+    # Esta rota serve para o JavaScript perguntar: "Quem está logado agora?"
+    if 'user_id' in session:
+        return jsonify({
+            "id": session['user_id'],
+            "nome": session['nome'],
+            "perfil": session['perfil']
+        }), 200
+    return jsonify({"erro": "Não autenticado"}), 401
+
+@app.route('/api/logout', methods=['POST'])
+def logout():
+    session.clear() # Apaga a memória de quem estava logado
+    return jsonify({"mensagem": "Logout efetuado"}), 200
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medconform - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="card login-card">
+            <div class="login-header text-center">
+                <div class="logo-icon blue mb-10" style="font-size: 2.5rem; color: #0284c7;">
+                    <i class="fa-solid fa-briefcase-medical"></i>
+                </div>
+                <h2>Medconform</h2>
+                <p class="text-muted text-sm">Autenticação no Sistema de Logística Clínica</p>
+            </div>
+            
+            <form id="login-form" class="mt-20">
+                <div class="form-group mb-15">
+                    <label for="email">E-mail Profissional</label>
+                    <input type="email" id="email" class="form-control" placeholder="medico@medconform.com" required>
+                </div>
+                <div class="form-group mb-15">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" class="form-control" placeholder="••••••••" required>
+                </div>
+                
+                <!-- Caixa para mensagens de erro -->
+                <div id="login-erro" class="badge badge-red-solid mt-10 mb-10" style="display: none; width: 100%; text-align: center;"></div>
+                
+                <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+                    Entrar no Sistema
+                </button>
+            </form>
+
+            <div class="login-footer mt-20 text-center text-sm text-muted">
+                <p><strong>Contas de Teste (Banca):</strong></p>
+                <p>medico@medconform.com / 123</p>
+                <p>auditor@medconform.com / 123</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="login.js"></script>
+</body>
+</html>

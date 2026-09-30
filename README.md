@@ -29,7 +29,6 @@ O sistema possui uma API REST desenvolvida em Python com Flask, responsável pel
 
 O back-end do projeto foi organizado em diferentes camadas, separando responsabilidades e facilitando a manutenção e evolução da aplicação.
 
-```text
 MedConform/
 ├── backend/
 │   ├── controllers/
@@ -45,7 +44,7 @@ MedConform/
     ├── index.html
     ├── style.css
     └── script.js
-```
+
 
 ## Funcionalidades
 
@@ -78,15 +77,28 @@ Projeto desenvolvido no **Colégio COTEMIG** como parte da formação técnica e
 
 ## 🚀 Funcionalidades Implementadas
 
-O projeto Medconform atende aos requisitos propostos entregando um fluxo de operações completo (CRUD) com arquitetura dividida em Services e Controllers, além de uma interface assíncrona. As 10 funcionalidades implementadas são:
+O projeto Medconform atende aos requisitos propostos entregando fluxos de operações completos com arquitetura dividida em Services e Controllers, além de uma interface assíncrona. As funcionalidades implementadas são:
 
-1. **Criar Solicitação de OPME (POST):** Cadastro de novas solicitações contendo dados do paciente, médico solicitante e detalhes de procedimentos cirúrgicos.
-2. **Listar Solicitações (GET):** Busca no banco de dados e exibição dinâmica dos registros na tabela principal do sistema.
-3. **Atualizar Status da Solicitação (PUT):** Aprovação ou negação rápida de solicitações ativas diretamente pelos botões de ação na interface.
-4. **Excluir Solicitação (DELETE):** Remoção permanente e segura de registros de solicitações do banco de dados.
-5. **Anexar Novo Documento (POST):** Cadastro de laudos, exames de imagem e guias de convênio na aba de Gestão de Documentos.
-6. **Listar Documentos Clínicos (GET):** Visualização em tabela de todos os arquivos anexados, categorizados por tipo e status.
-7. **Excluir Documento (DELETE):** Remoção de documentos indesejados, expirados ou cadastrados incorretamente.
-8. **Editar Documento (PUT):** Reaproveitamento do formulário para carregar e atualizar os dados de um documento já existente.
-9. **Dashboard de Estatísticas em Tempo Real (GET):** Endpoint dedicado no backend para calcular e exibir dinamicamente os Indicadores Chave (KPIs) nos cards superiores (Total de pendências, aprovadas/negadas).
-10. **Filtros Dinâmicos de Tabela (Frontend):** Algoritmo em JavaScript que permite alternar as abas ("Todos os Casos", "Pendentes", "Aprovados") filtrando os dados na tela instantaneamente sem a necessidade de recarregar a página.
+**Autenticação e Regras de Negócio (Novas)**
+1. **Auditoria Automatizada (IA):** Integração com a API do Google Gemini para analisar justificativas médicas e gerar pareceres técnicos de conformidade clínica.
+2. **Autenticação de Usuários:** Sistema de Login gerenciado via sessões no backend (Flask `server-side`), garantindo proteção de rotas.
+3. **Controle de Acesso (RBAC):** Renderização dinâmica da interface. Ocultação de menus e botões de acordo com o perfil logado (Médico Cirurgião vs. Auditor Chefe).
+4. **Segregação de Dados:** Filtro de privacidade no banco de dados que garante que o médico solicitante visualize e interaja apenas com os dados dos seus próprios pacientes.
+5. **Geração de Laudos Oficiais em PDF:** Exportação de pareceres técnicos em papel timbrado renderizado através de "molde fantasma" (HTML/CSS dinâmico) para o `html2pdf.js`.
+6. **Segurança de Tráfego (CORS):** Configuração avançada de cabeçalhos e credenciais para comunicação segura entre origens distintas (Frontend 5500 ↔ Backend 5000).
+
+**Gestão de Solicitações OPME**
+7. **Criar Solicitação de OPME (POST):** Cadastro de novas solicitações contendo dados do paciente, médico solicitante e detalhes de procedimentos cirúrgicos.
+8. **Listar Solicitações (GET):** Busca no banco de dados e exibição dinâmica dos registros na tabela principal do sistema.
+9. **Atualizar Status da Solicitação (PUT):** Aprovação ou negação rápida de solicitações ativas diretamente pelos botões de ação na interface.
+10. **Excluir Solicitação (DELETE):** Remoção permanente e segura de registros de solicitações do banco de dados.
+
+**Gestão de Documentos Clínicos**
+11. **Anexar Novo Documento (POST):** Cadastro de laudos, exames de imagem e guias de convênio na aba de Gestão de Documentos.
+12. **Listar Documentos Clínicos (GET):** Visualização em tabela de todos os arquivos anexados, categorizados por tipo e status.
+13. **Editar Documento (PUT):** Reaproveitamento do formulário para carregar e atualizar os dados de um documento já existente.
+14. **Excluir Documento (DELETE):** Remoção de documentos indesejados, expirados ou cadastrados incorretamente.
+
+**Estatísticas e Usabilidade**
+15. **Dashboard de Estatísticas em Tempo Real (GET):** Endpoint dedicado no backend para calcular e exibir dinamicamente os Indicadores Chave (KPIs) nos cards superiores (Total de pendências, aprovadas/negadas).
+16. **Filtros Dinâmicos de Tabela (Frontend):** Algoritmo em JavaScript que permite alternar as abas ("Todos os Casos", "Pendentes", "Aprovados") filtrando os dados na tela instantaneamente sem a necessidade de recarregar a página.

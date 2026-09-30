@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medconform - Auditoria Técnica</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="logo-area">
+                    <div class="logo-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
+                    <div class="logo-text">
+                        <h1>Medconform</h1>
+                        <span>LOGÍSTICA CLÍNICA</span>
+                    </div>
+                </div>
+
+                <button id="btn-nova-solicitacao" class="btn-new-request"
+                    onclick="window.location.href='solicitacoes.html'">
+                    <i class="fa-solid fa-plus"></i> Nova Solicitação
+                </button>
+
+                <nav class="main-menu">
+                    <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                    <a href="solicitacoes.html" class="menu-item"><i class="fa-regular fa-clipboard"></i>
+                        Solicitações</a>
+                    <a href="documentos.html" class="menu-item"><i class="fa-solid fa-file-medical"></i> Documentos</a>
+                    <a href="auditoria.html" class="menu-item active"><i class="fa-solid fa-gavel"></i> Auditoria</a>
+                    <a href="materiais.html" class="menu-item"><i class="fa-solid fa-box-open"></i> Materiais</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-truck"></i> Fornecedores</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
+                    <a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                <a href="#" class="menu-item"><i class="fa-regular fa-circle-question"></i> Ajuda</a>
+                <a href="#" class="menu-item sign-out"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar por ID, médico ou paciente...">
+                </div>
+                <div class="topbar-actions">
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fa-regular fa-circle-question"></i></button>
+                    <div class="user-profile">
+                        <div class="user-info text-right">
+                            <strong>Dra. Sarah Jenkins</strong>
+                            <span>Registradora Chefe</span>
+                        </div>
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Perfil">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Conteúdo da Página de Auditoria -->
+            <div class="page-content">
+                <div class="page-header mb-25">
+                    <div class="header-titles">
+                        <h2>Painel de Auditoria Clínica</h2>
+                        <p>Análise técnica de guias, emissão de pareceres e verificação de conformidade.</p>
+                    </div>
+                </div>
+
+                <div class="form-layout">
+
+                    <!-- Coluna Principal (Fila de Casos) -->
+                    <div class="form-main">
+                        <div class="card table-card">
+                            <div class="table-header">
+                                <h3><i class="fa-solid fa-list-check"></i> Fila de Pendências</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>PACIENTE</th>
+                                            <th>PROCEDIMENTO</th>
+                                            <th>AÇÃO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabela-auditoria">
+                                        <!-- Apenas os casos "Pendentes" serão injetados aqui via JS -->
+                                        <tr>
+                                            <td colspan="4" class="table-empty-state">
+                                                <i class="fa-solid fa-check-double"></i><br>
+                                                <strong>Nenhuma pendência no momento</strong>
+                                                <p>A fila de auditoria está limpa.</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Lateral (Ações e IA) -->
+                    <div class="form-sidebar">
+
+                        <!-- Card de Análise da IA -->
+                        <div class="card info-card card-ia">
+                            <h3><i class="fa-solid fa-robot"></i> Copiloto de Auditoria (IA)</h3>
+                            <p id="ai-feedback" class="text-ia">
+                                Selecione um caso na fila para acionar a análise inteligente de coerência do pedido.
+                            </p>
+                            <button id="btn-analisar-ia" class="btn-outline btn-full btn-ia" disabled
+                                onclick="executarAnaliseIA()">
+                                Analisar Risco
+                            </button>
+                        </div>
+
+                        <!-- Detalhes do Caso Selecionado -->
+                        <div class="card mb-20 oculto" id="card-detalhes-auditoria">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-notes-medical"></i> Detalhes do Caso <span id="detalhe-id"
+                                        class="text-dark-blue font-bold"></span></h3>
+                            </div>
+                            <div class="card-body-auditoria">
+                                <p><strong>Paciente:</strong> <span id="detalhe-paciente"></span></p>
+                                <p><strong>Procedimento:</strong> <span id="detalhe-procedimento"></span></p>
+                                <p><strong>Justificativa:</strong> <span id="detalhe-justificativa"></span></p>
+
+                                <hr class="divisor-auditoria">
+
+                                <h4 class="titulo-cotacao"><i class="fa-solid fa-box-open"></i> Materiais e Cotação</h4>
+                                <p><strong>Fornecedor (Mais barato):</strong> <span id="detalhe-fornecedor"
+                                        class="badge-urgencia badge-fornecedor"></span></p>
+                                <p><strong>Valor Total Estimado:</strong> <span id="detalhe-valor"
+                                        class="valor-destaque"></span></p>
+
+                                <div class="box-materiais">
+                                    <strong>Itens Solicitados:</strong>
+                                    <p id="detalhe-materiais" class="texto-materiais"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 👆 FIM DO BLOCO NOVO 👆 -->
+
+                        <!-- Formulário de Parecer -->
+                        <div class="card mt-15">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-gavel"></i> Emissão de Parecer</h3>
+                            </div>
+                            <div class="form-group mb-15">
+                                <label>ID em Análise</label>
+                                <input type="text" class="form-control" id="audit-id" readonly
+                                    placeholder="Selecione na fila...">
+                            </div>
+                            <div class="form-group mb-20">
+                                <label>Justificativa do Auditor</label>
+                                <textarea class="form-control" id="audit-parecer" rows="5"
+                                    placeholder="Descreva os motivos técnicos para a decisão..."></textarea>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <button class="btn-outline btn-reprovar"
+                                    onclick="enviarParecer('Negado')">REPROVAR</button>
+                                <button class="btn-fill btn-aprovar"
+                                    onclick="enviarParecer('Aprovado')">APROVAR</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
