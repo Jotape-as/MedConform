@@ -6,7 +6,6 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     const erroDiv = document.getElementById('login-erro');
     const btnSubmit = e.target.querySelector('button');
 
-    // Reset visual
     erroDiv.style.display = 'none';
     btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Autenticando...';
     btnSubmit.disabled = true;
@@ -21,11 +20,9 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         const dados = await response.json();
 
         if (response.ok) {
-            // Guardamos os dados básicos do utilizador no navegador para ajustar a interface depois
             sessionStorage.setItem('usuarioNome', dados.usuario.nome);
             sessionStorage.setItem('usuarioPerfil', dados.usuario.perfil);
 
-            // Redireciona para o Dashboard (index.html)
             window.location.href = 'index.html';
         } else {
             erroDiv.textContent = dados.erro || "Falha na autenticação.";

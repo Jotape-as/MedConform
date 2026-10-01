@@ -1,14 +1,11 @@
 :root {
     --primary-color: #0c3e60;
-    /* Azul escuro corporativo */
     --primary-hover: #0a304a;
     --bg-color: #F8FAFC;
     --sidebar-bg: #FFFFFF;
     --border-color: #E2E8F0;
     --text-main: #1E293B;
     --text-muted: #64748B;
-
-    /* Status Colors */
     --error-color: #EF4444;
     --error-bg: #FEF2F2;
     --warning-color: #F59E0B;
@@ -17,12 +14,9 @@
     --success-bg: #ECFDF5;
     --info-color: #3B82F6;
     --info-bg: #EFF6FF;
-
-    /* Chart Colors */
     --chart-dark: #006b99;
     --chart-mid: #369cce;
     --chart-light: #cde4f3;
-
     --card-radius: 8px;
 }
 
@@ -37,11 +31,9 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f7fe;
-    /* Garante que o fundo não fique branco */
     overflow-x: hidden;
 }
 
-/* Layout Core & Sidebar (Reaproveitado do anterior) */
 .app-container {
     display: flex;
     width: 100vw;
@@ -152,10 +144,8 @@ body {
     margin-bottom: 24px;
 }
 
-/* Main Content & Topbar */
 .main-content {
     flex: 1;
-    /* Faz a área principal expandir e empurrar tudo para a direita */
     width: 100%;
     overflow-y: auto;
 }
@@ -237,7 +227,6 @@ body {
     color: var(--text-muted);
 }
 
-/* Page Content & Header */
 .page-content {
     padding: 32px;
     max-width: 1280px;
@@ -296,7 +285,6 @@ body {
     gap: 8px;
 }
 
-/* KPI Cards Grid */
 .kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -475,7 +463,6 @@ body {
     color: white;
 }
 
-/* Dashboard Grid (Chart + Alerts) */
 .dashboard-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -489,7 +476,6 @@ body {
     border-radius: var(--card-radius);
 }
 
-/* Chart Section */
 .chart-section {
     display: flex;
     flex-direction: column;
@@ -608,13 +594,6 @@ body {
     color: var(--info-color);
 }
 
-.link-download {
-    color: var(--info-color);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-/* Side Widgets */
 .side-widgets {
     display: flex;
     flex-direction: column;
@@ -764,7 +743,6 @@ body {
     background-color: var(--info-bg);
 }
 
-/* Table Section */
 .table-card {
     overflow: hidden;
 }
@@ -944,7 +922,6 @@ body {
     color: var(--text-main);
 }
 
-/* Floating Action Button (FAB) */
 .fab-btn {
     position: fixed;
     bottom: 32px;
@@ -970,8 +947,6 @@ body {
     background-color: var(--primary-hover);
 }
 
-
-
 :root {
     --bg-color: #f4f6f8;
     --sidebar-bg: #ffffff;
@@ -989,12 +964,6 @@ body {
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: var(--font-family);
     background-color: var(--bg-color);
@@ -1004,7 +973,6 @@ body {
     overflow: hidden;
 }
 
-/* --- SIDEBAR --- */
 .sidebar {
     width: 260px;
     background-color: var(--sidebar-bg);
@@ -1085,7 +1053,6 @@ body {
     text-decoration: none;
 }
 
-/* --- MAIN CONTENT --- */
 .main-wrapper {
     flex-grow: 1;
     display: flex;
@@ -1093,7 +1060,6 @@ body {
     overflow-y: auto;
 }
 
-/* Topbar */
 .topbar {
     height: 70px;
     background-color: var(--sidebar-bg);
@@ -1159,7 +1125,6 @@ body {
     color: var(--text-muted);
 }
 
-/* Content Body */
 .content-body {
     padding: 30px 40px;
     display: grid;
@@ -1168,7 +1133,6 @@ body {
     align-items: start;
 }
 
-/* Header Texts */
 .page-header {
     margin-bottom: 24px;
 }
@@ -1192,7 +1156,6 @@ body {
     color: var(--text-muted);
 }
 
-/* Cards */
 .card {
     background-color: #ffffff;
     border-radius: var(--border-radius);
@@ -1216,7 +1179,6 @@ body {
     gap: 8px;
 }
 
-/* Forms */
 .form-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1276,7 +1238,6 @@ select.form-control {
     background-size: 10px auto;
 }
 
-/* Specific Elements */
 .badge-warning {
     background-color: var(--warning-bg);
     color: var(--warning);
@@ -1343,7 +1304,6 @@ select.form-control {
     font-size: 0.85rem;
 }
 
-/* Table */
 .materials-table {
     width: 100%;
     border-collapse: collapse;
@@ -1415,7 +1375,6 @@ select.form-control {
     font-weight: bold;
 }
 
-/* RIGHT PANEL */
 .action-buttons {
     display: flex;
     gap: 10px;
@@ -1605,9 +1564,6 @@ select.form-control {
     z-index: 1;
 }
 
-/* ========================================== */
-/* CLASSES UTILITÁRIAS DE ESPAÇAMENTO         */
-/* ========================================== */
 .mb-15 {
     margin-bottom: 15px;
 }
@@ -1628,9 +1584,6 @@ select.form-control {
     text-align: right;
 }
 
-/* ========================================== */
-/* LAYOUT DA TELA DE NOVA SOLICITAÇÃO         */
-/* ========================================== */
 .form-layout {
     display: flex;
     gap: 20px;
@@ -1650,12 +1603,10 @@ select.form-control {
     gap: 20px;
 }
 
-/* Campos somente leitura */
 input[readonly] {
     background-color: #f9fafb;
 }
 
-/* Card Header Flex (Para alinhar títulos e badges) */
 .card-header-flex {
     display: flex;
     justify-content: space-between;
@@ -1671,10 +1622,6 @@ input[readonly] {
     font-weight: bold;
 }
 
-/* ========================================== */
-/* COMPONENTES (UPLOAD E DICAS)               */
-/* ========================================== */
-/* Estilos da Caixa de Upload de Exames */
 .upload-box {
     border: 2px dashed #cbd5e1;
     border-radius: 10px;
@@ -1695,7 +1642,6 @@ input[readonly] {
     margin-bottom: 10px;
 }
 
-/* Oculta o input nativo de arquivo mantendo-o funcional via JS */
 .input-arquivo-oculto {
     display: none;
 }
@@ -1740,7 +1686,6 @@ input[readonly] {
     line-height: 1.5;
 }
 
-/* Container de feedback do arquivo anexado */
 .arquivo-anexado-box {
     display: none;
     align-items: center;
@@ -1773,9 +1718,6 @@ input[readonly] {
     color: #b91c1c;
 }
 
-/* ========================================== */
-/* ESTILOS DA TABELA (EMPTY STATE E BOTÕES)   */
-/* ========================================== */
 .table-empty-state {
     text-align: center;
     padding: 40px;
@@ -1819,9 +1761,6 @@ input[readonly] {
     margin-right: 0;
 }
 
-/* ========================================== */
-/* ESTILOS ESPECÍFICOS (AUDITORIA E IA)       */
-/* ========================================== */
 .card-ia {
     background-color: #4f46e5;
     color: white;
@@ -1831,7 +1770,6 @@ input[readonly] {
     font-size: 14px;
     margin-bottom: 10px;
     color: #e0e7ff;
-    /* Um tom de azul bem claro para ler bem no fundo escuro */
 }
 
 .btn-ia {
@@ -1849,7 +1787,6 @@ input[readonly] {
     color: white;
 }
 
-/* Estilos do Modal Flutuante */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -1888,7 +1825,6 @@ input[readonly] {
     color: #64748b;
 }
 
-/* Estilos para a seção de Materiais OPME */
 .card-body-opme {
     padding: 20px;
 }
@@ -1929,7 +1865,6 @@ input[readonly] {
     color: #b91c1c;
 }
 
-/* Detalhes da Auditoria e Cotação */
 .oculto {
     display: none;
 }
@@ -1972,11 +1907,6 @@ input[readonly] {
     font-family: monospace;
 }
 
-
-/* ==========================================
-   MODAL DE MATERIAIS / COTAÇÃO AUTOMÁTICA
-   ========================================== */
-
 .grupo-busca {
     display: flex;
     gap: 10px;
@@ -2009,11 +1939,6 @@ input[readonly] {
     gap: 10px;
 }
 
-/* ==========================================
-   MÓDULO: MATERIAIS E CATÁLOGO
-   ========================================== */
-
-/* Se ainda não tiveres a classe oculto definida globalmente */
 .oculto {
     display: none !important;
 }
@@ -2042,9 +1967,6 @@ input[readonly] {
     display: block;
 }
 
-/* =========================================
-   TELA DE LOGIN
-========================================= */
 .login-body {
     display: flex;
     justify-content: center;
@@ -2070,38 +1992,35 @@ input[readonly] {
     margin-bottom: 5px;
 }
 
-/* =========================================
-   LAUDO PDF - TEMPLATE OCULTO
-========================================= */
 .pdf-container {
-    padding: 40px; 
-    font-family: Arial, sans-serif; 
-    color: #1e293b; 
-    width: 100%; 
+    padding: 40px;
+    font-family: Arial, sans-serif;
+    color: #1e293b;
+    width: 100%;
     max-width: 800px;
-    background-color: white; /* Garante fundo branco no PDF */
+    background-color: white;
 }
 
 .pdf-header {
-    border-bottom: 3px solid #0284c7; 
-    padding-bottom: 20px; 
-    margin-bottom: 30px; 
-    display: flex; 
-    justify-content: space-between; 
+    border-bottom: 3px solid #0284c7;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
     align-items: flex-end;
 }
 
 .pdf-logo-area h1 {
-    color: #0284c7; 
-    margin: 0; 
-    font-size: 28px; 
+    color: #0284c7;
+    margin: 0;
+    font-size: 28px;
     letter-spacing: 1px;
 }
 
 .pdf-logo-area p {
-    margin: 5px 0 0; 
-    font-size: 14px; 
-    color: #64748b; 
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #64748b;
     text-transform: uppercase;
 }
 
@@ -2110,14 +2029,14 @@ input[readonly] {
 }
 
 .pdf-title-area h2 {
-    margin: 0; 
-    font-size: 18px; 
+    margin: 0;
+    font-size: 18px;
     color: #0f172a;
 }
 
 .pdf-title-area p {
-    margin: 5px 0 0; 
-    font-size: 12px; 
+    margin: 5px 0 0;
+    font-size: 12px;
     color: #64748b;
 }
 
@@ -2126,16 +2045,16 @@ input[readonly] {
 }
 
 .pdf-section h3 {
-    background-color: #f8fafc; 
-    border-left: 4px solid #0284c7; 
-    padding: 8px 12px; 
-    margin-top: 0; 
+    background-color: #f8fafc;
+    border-left: 4px solid #0284c7;
+    padding: 8px 12px;
+    margin-top: 0;
     font-size: 16px;
 }
 
 .pdf-section-content {
-    padding-left: 12px; 
-    font-size: 14px; 
+    padding-left: 12px;
+    font-size: 14px;
     line-height: 1.8;
 }
 
@@ -2144,31 +2063,31 @@ input[readonly] {
 }
 
 .pdf-status-line span {
-    font-weight: bold; 
+    font-weight: bold;
     text-transform: uppercase;
 }
 
 .pdf-justificativa-box {
-    border: 1px solid #cbd5e1; 
-    background-color: #f8fafc; 
-    padding: 20px; 
-    margin-top: 15px; 
-    border-radius: 4px; 
+    border: 1px solid #cbd5e1;
+    background-color: #f8fafc;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 4px;
     min-height: 120px;
 }
 
 .pdf-justificativa-box p {
-    margin: 0; 
-    font-style: italic; 
-    font-size: 14px; 
-    line-height: 1.6; 
+    margin: 0;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.6;
     color: #334155;
 }
 
 .pdf-signature-section {
-    margin-top: 100px; 
-    display: flex; 
-    justify-content: center; 
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
     text-align: center;
 }
 
@@ -2177,18 +2096,18 @@ input[readonly] {
 }
 
 .pdf-signature-line {
-    border-top: 1px solid #0f172a; 
+    border-top: 1px solid #0f172a;
     margin-bottom: 10px;
 }
 
 .pdf-auditor-name {
-    margin: 0; 
-    font-weight: bold; 
+    margin: 0;
+    font-weight: bold;
     font-size: 16px;
 }
 
 .pdf-signature-role {
-    margin: 5px 0 0; 
-    font-size: 12px; 
+    margin: 5px 0 0;
+    font-size: 12px;
     color: #64748b;
 }

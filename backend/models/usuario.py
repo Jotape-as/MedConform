@@ -6,8 +6,8 @@ class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    senha = db.Column(db.String(100), nullable=False) # Num sistema real estaria criptografada
-    perfil = db.Column(db.String(20), nullable=False) # 'medico' ou 'auditor'
+    senha = db.Column(db.String(100), nullable=False)  # Num sistema real estaria encriptada
+    perfil = db.Column(db.String(20), nullable=False)  # 'medico' ou 'auditor'
 
     def to_dict(self):
         return {

@@ -12,7 +12,7 @@
 
 <body>
     <div class="app-container">
-        <!-- Sidebar (Menu Lateral) -->
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-top">
                 <div class="logo-area">
@@ -28,11 +28,11 @@
                 </button>
                 <nav class="main-menu">
                     <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
-                    <a href="solicitacoes.html" class="menu-item"><i
-                            class="fa-regular fa-clipboard"></i>Solicitações</a>
+                    <a href="solicitacoes.html" class="menu-item"><i class="fa-regular fa-clipboard"></i>
+                        Solicitações</a>
                     <a href="documentos.html" class="menu-item"><i class="fa-solid fa-file-medical"></i> Documentos</a>
                     <a href="auditoria.html" id="menu-auditoria" class="menu-item"><i class="fa-solid fa-gavel"></i>
-                        Auditoria</a> <!-- 👇 Materiais está ativo 👇 -->
+                        Auditoria</a>
                     <a href="materiais.html" class="menu-item active"><i class="fa-solid fa-box-open"></i> Materiais</a>
                     <a href="#" class="menu-item"><i class="fa-solid fa-truck"></i> Fornecedores</a>
                     <a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
@@ -40,13 +40,34 @@
                 </nav>
             </div>
             <div class="sidebar-bottom">
+                <a href="#" class="menu-item"><i class="fa-regular fa-circle-question"></i> Ajuda</a>
                 <a href="#" id="btn-logout" class="menu-item sign-out"><i
                         class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
             </div>
         </aside>
 
-        <!-- Conteúdo Principal -->
+        <!-- Main Content -->
         <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar materiais, categorias ou fabricantes...">
+                </div>
+                <div class="topbar-actions">
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fa-regular fa-circle-question"></i></button>
+                    <button class="icon-btn"><i class="fa-solid fa-grip"></i></button>
+                    <div class="user-profile">
+                        <div class="user-info text-right">
+                            <strong id="user-name-display">Carregando...</strong>
+                            <span id="user-role-display">Aguarde...</span>
+                        </div>
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Foto de Perfil">
+                    </div>
+                </div>
+            </header>
+
             <div class="page-content">
                 <div class="page-header">
                     <div class="header-titles">
@@ -75,7 +96,7 @@
                                 </tr>
                             </thead>
                             <tbody id="tabela-materiais">
-                                <!-- O JavaScript vai injetar as linhas aqui -->
+                                <!-- Preenchido via JS -->
                             </tbody>
                         </table>
                     </div>
@@ -120,7 +141,6 @@
                         </select>
                     </div>
 
-                    <!-- Campos Bloqueados contra Fraude (readonly) -->
                     <div class="form-group mt-10">
                         <label><i class="fa-solid fa-lock icone-bloqueado"></i> Fabricante (Menor Preço
                             Encontrado)</label>
@@ -140,7 +160,9 @@
                 </form>
             </div>
         </div>
-        <script src="script.js"></script>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>

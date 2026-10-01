@@ -6,7 +6,7 @@ class Material(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
     codigo_anvisa = db.Column(db.String(50), unique=True, nullable=False)
-    categoria = db.Column(db.String(50), nullable=False) # Ex: Órtese, Prótese, Material Especial
+    categoria = db.Column(db.String(50), nullable=False) 
     fabricante = db.Column(db.String(100), nullable=False)
     preco_base = db.Column(db.Float, nullable=False, default=0.0)
 

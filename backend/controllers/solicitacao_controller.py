@@ -14,7 +14,6 @@ import json
 
 load_dotenv()
 
-
 class SolicitacaoController:
 
     def listar(self):
@@ -24,7 +23,6 @@ class SolicitacaoController:
             
             lista = []
             for s in solicitacoes:
-                # Formata o valor para a moeda local, se existir
                 valor_db = getattr(s, 'valor_total', None)
                 if valor_db:
                     valor_formatado = f"R$ {valor_db:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
@@ -38,10 +36,7 @@ class SolicitacaoController:
                     "procedimento": s.procedimento,
                     "status": s.status,
                     "data": s.data_agendada or "A definir",
-                    
-                    # 👇 A correção principal está aqui 👇
                     "valor": valor_formatado,
-                    
                     "justificativa": s.justificativa,
                     "materiais_solicitados": getattr(s, 'materiais_solicitados', None),
                     "valor_total": valor_db,
@@ -50,6 +45,50 @@ class SolicitacaoController:
             return jsonify(lista), 200
         except Exception as e:
             return jsonify({"erro": str(e)}), 500
+
+    def listar_pendentes(self):
+        try:
+            service = ListarPendentesService()
+            solicitacoes = service.executar()
+            
+            lista = []
+            for s in solicitacoes:
+                lista.append({
+                    "id_real": s.id,
+                    "id": f"#RQ-{s.id:04d}",
+                    "paciente": getattr(s, 'nome_paciente', 'Não informado'),
+                    "procedimento": s.procedimento,
+                    "status": s.status,
+                    "justificativa": s.justificativa,
+                    "materiais_solicitados": getattr(s, 'materiais_solicitados', None),
+                    "valor_total": getattr(s, 'valor_total', None),
+                    "fornecedor_vencedor": getattr(s, 'fornecedor_vencedor', None)
+                })
+                
+            return jsonify(lista), 200
+        except Exception as e:
+            return jsonify({"erro": str(e)}), 500
+
+    def criar(self, request):
+        try:
+            dados_texto = request.form.to_dict()
+            nomes_materiais = request.form.getlist('nome_material[]')
+            quantidades = request.form.getlist('quantidade_material[]')
+            
+            lista_opme = []
+            for nome, qtd in zip(nomes_materiais, quantidades):
+                if nome.strip():
+                    lista_opme.append({"nome": nome.strip(), "quantidade": int(qtd)})
+            
+            dados_texto['materiais_opme'] = lista_opme
+            arquivo = request.files.get('exame')
+            
+            service = CriarSolicitacaoService()
+            nova_solicitacao = service.executar(dados_texto, arquivo)
+            
+            return jsonify({"mensagem": "Solicitação criada com sucesso!", "id_solicitacao": nova_solicitacao.id}), 201
+        except Exception as e:
+            return jsonify({"erro": str(e)}), 400
 
     def atualizar_status(self, solicitacao_id, request):
         try:
@@ -76,31 +115,6 @@ class SolicitacaoController:
         except Exception as e:
             return jsonify({"erro": str(e)}), 500
 
-    def listar_pendentes(self):
-        try:
-            service = ListarPendentesService()
-            solicitacoes = service.executar()
-            
-            lista = []
-            for s in solicitacoes:
-                lista.append({
-                    "id_real": s.id,
-                    "id": f"#RQ-{s.id:04d}",
-                    "paciente": getattr(s, 'nome_paciente', 'Não informado'),
-                    "procedimento": s.procedimento,
-                    "status": s.status,
-                    
-                    # 👇 CAMPOS NOVOS ADICIONADOS AQUI 👇
-                    "justificativa": s.justificativa,
-                    "materiais_solicitados": getattr(s, 'materiais_solicitados', None),
-                    "valor_total": getattr(s, 'valor_total', None),
-                    "fornecedor_vencedor": getattr(s, 'fornecedor_vencedor', None)
-                })
-                
-            return jsonify(lista), 200
-        except Exception as e:
-            return jsonify({"erro": str(e)}), 500
-
     def emitir_parecer(self, solicitacao_id, request):
         try:
             dados = request.get_json() or {}
@@ -118,14 +132,11 @@ class SolicitacaoController:
 
     def analisar_com_ia(self, id):
         try:
-            # 1. PRIMEIRO PASSO: Buscar a solicitação na base de dados!
-            # (Se o teu modelo tiver outro nome, ajusta de acordo)
             solicitacao = Solicitacao.query.get(id)
             
             if not solicitacao:
                 return jsonify({"erro": "Solicitação não encontrada"}), 404
 
-            # 2. SEGUNDO PASSO: Só agora criamos o prompt, pois a variável 'solicitacao' já existe
             prompt_auditoria = f"""
             Você é um Médico Auditor Chefe especialista em OPME (Órteses, Próteses e Materiais Especiais).
             Sua missão é cruzar os dados clínicos do paciente com os materiais de alto custo solicitados no catálogo oficial do hospital. O objetivo é bloquear fraudes, superfaturamentos por quantidade abusiva e erros anatômicos.
@@ -146,7 +157,7 @@ class SolicitacaoController:
                 "parecer_tecnico": "Escreva o parecer aqui..."
             }}
             """
-            # 3. Pega a chave de forma segura e chama a IA
+            
             chave_api = os.getenv("GEMINI_API_KEY")
             client = genai.Client(api_key=chave_api) 
             resposta = client.models.generate_content(
@@ -154,42 +165,21 @@ class SolicitacaoController:
                 contents=prompt_auditoria
             )
             
-            # 4. Limpa a resposta
             texto_limpo = resposta.text.replace('```json', '').replace('```', '').strip()
             dados_ia = json.loads(texto_limpo)
             
             return jsonify(dados_ia), 200
 
         except Exception as e:
-            print("Erro na IA:", e)
+            erro_str = str(e)
+            print(f"Erro na IA: {erro_str}")
+            
+            # Interceção amigável do erro 503 da Google
+            if "503" in erro_str or "UNAVAILABLE" in erro_str:
+                return jsonify({
+                    "status": "AGUARDANDO",
+                    "risco_fraude": "INDEFINIDO",
+                    "parecer_tecnico": "⚠️ **Aviso de Sistema:** Os servidores de Inteligência Artificial estão a experienciar um pico temporário de acessos no momento. Por favor, aguarde alguns minutos e tente analisar novamente."
+                }), 200 # Devolve 200 para o JavaScript conseguir ler a mensagem e exibi-la no cartão azul
+                
             return jsonify({"erro": "Falha ao processar com IA."}), 500
-        
-        
-    def criar(self, request):
-        try:
-            # Converte o formulário padrão para um dicionário
-            dados_texto = request.form.to_dict()
-            
-            # Captura as listas de materiais e quantidades enviadas pelo HTML
-            nomes_materiais = request.form.getlist('nome_material[]')
-            quantidades = request.form.getlist('quantidade_material[]')
-            
-            # Monta uma lista de dicionários com os materiais estruturados
-            lista_opme = []
-            for nome, qtd in zip(nomes_materiais, quantidades):
-                if nome.strip():
-                    lista_opme.append({"nome": nome.strip(), "quantidade": int(qtd)})
-            
-            # Adiciona a lista estruturada aos dados que vão para o Service
-            dados_texto['materiais_opme'] = lista_opme
-            
-            arquivo = request.files.get('exame')
-            
-            service = CriarSolicitacaoService()
-            nova_solicitacao = service.executar(dados_texto, arquivo)
-            
-            return jsonify({"mensagem": "Solicitação criada com sucesso!", "id_solicitacao": nova_solicitacao.id}), 201
-        except Exception as e:
-            return jsonify({"erro": str(e)}), 400
-
-    

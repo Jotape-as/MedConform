@@ -28,7 +28,6 @@
                     </div>
                 </div>
 
-                <!-- O Botão de nova solicitação (Lá no topo da Sidebar) -->
                 <button id="btn-nova-solicitacao" class="btn-new-request"
                     onclick="window.location.href='solicitacoes.html'">
                     <i class="fa-solid fa-plus"></i> Nova Solicitação
@@ -74,14 +73,14 @@
                             <strong id="user-name-display">Carregando...</strong>
                             <span id="user-role-display">Aguarde...</span>
                         </div>
-                        <img src="https://i.pravatar.cc/150?img=5" alt="Dra. Sarah Jenkins">
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Foto de Perfil">
                     </div>
                 </div>
             </header>
 
             <!-- Page Content -->
             <div class="page-content">
-                <!-- Header section -->
+                <!-- Header -->
                 <div class="page-header">
                     <div class="header-titles">
                         <h2>Visão Geral do Sistema</h2>
@@ -94,9 +93,8 @@
                     </div>
                 </div>
 
-                <!-- KPI Cards Row -->
+                <!-- KPI Cards -->
                 <div class="kpi-grid">
-                    <!-- Card 1 -->
                     <div class="kpi-card">
                         <div class="kpi-top">
                             <div class="kpi-title">SOLICITAÇÕES PENDENTES</div>
@@ -112,7 +110,6 @@
                         </div>
                     </div>
 
-                    <!-- Card 2 -->
                     <div class="kpi-card">
                         <div class="kpi-top">
                             <div class="kpi-title">APROVADAS/NEGADAS</div>
@@ -134,7 +131,6 @@
                         </div>
                     </div>
 
-                    <!-- Card 3 -->
                     <div class="kpi-card">
                         <div class="kpi-top">
                             <div class="kpi-title">CIRURGIAS URGENTES</div>
@@ -151,7 +147,6 @@
                         </div>
                     </div>
 
-                    <!-- Card 4 -->
                     <div class="kpi-card">
                         <div class="kpi-top">
                             <div class="kpi-title">TEMPO MÉDIO DE APROVAÇÃO</div>
@@ -166,10 +161,9 @@
                         </div>
                     </div>
 
-                    <!-- Main Grid Layout (Chart + Alerts) -->
+                    <!-- Main Grid Layout -->
                     <div class="dashboard-grid">
-
-                        <!-- Left Column: Chart -->
+                        <!-- Chart -->
                         <div class="chart-section card">
                             <div class="chart-header">
                                 <h3>Tendências de Gastos Mensais</h3>
@@ -178,7 +172,6 @@
                                     <span><i class="fa-solid fa-circle color-protese"></i> Próteses</span>
                                 </div>
                             </div>
-                            <!-- O canvas onde o Chart.js vai desenhar -->
                             <div style="position: relative; height: 300px; width: 100%;">
                                 <canvas id="graficoGastos"></canvas>
                             </div>
@@ -186,15 +179,14 @@
                                 <div class="financial-summary">
                                     <p>Total Projetado: <strong id="kpi-valor-aprovado" style="color: #b91c1c;">R$
                                             0,00</strong> &nbsp;&nbsp;&nbsp; Orçamento Disponível: <strong
-                                            style="color: #0369a1;">R$ 850.000,00</strong></p> <span>
+                                            style="color: #0369a1;">R$ 850.000,00</strong></p>
                                 </div>
                                 <a href="#" class="link-download">Baixar Detalhes</a>
                             </div>
                         </div>
 
-                        <!-- Right Column: Alerts and Quick Links -->
+                        <!-- Side Widgets -->
                         <div class="side-widgets">
-                            <!-- Alertas Críticos -->
                             <div class="card alerts-card">
                                 <div class="card-header border-none pb-0">
                                     <h3>Alertas Críticos</h3>
@@ -226,7 +218,6 @@
                                 </div>
                             </div>
 
-                            <!-- Botões Rápidos -->
                             <div class="quick-links-grid">
                                 <div class="card quick-link-card">
                                     <i class="fa-solid fa-magnifying-glass-chart"></i>
@@ -264,23 +255,22 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tabela-solicitacoes">
+                                    <!-- Preenchido dinamicamente pelo script.js -->
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
                     <div class="table-footer">
-                        <span class="text-muted text-sm">Mostrando 3 de 128 itens</span>
+                        <span class="text-muted text-sm">Mostrando resultados recentes</span>
                         <div class="pagination">
                             <button class="page-btn"><i class="fa-solid fa-chevron-left"></i></button>
                             <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
                 </div>
-
-            </div>
         </main>
 
-        <!-- Floating Action Button -->
         <button class="fab-btn">
             <i class="fa-solid fa-plus"></i>
         </button>
@@ -292,7 +282,6 @@
             <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center;">
                 <h3><i class="fa-solid fa-file-signature"></i> Detalhes do Parecer</h3>
                 <div>
-                    <!-- Botão Mágico do PDF -->
                     <button class="btn-primary" onclick="gerarLaudoPDF()"
                         style="margin-right: 15px; padding: 6px 12px; font-size: 0.9em;">
                         <i class="fa-solid fa-file-pdf"></i> Imprimir Laudo
@@ -314,13 +303,10 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
 
-    <!-- Molde Oculto para o Laudo em PDF -->
+    <!-- Template Laudo PDF -->
     <div id="template-laudo-pdf" style="display: none;">
         <div class="pdf-container">
-
-            <!-- Cabeçalho Timbrado -->
             <div class="pdf-header">
                 <div class="pdf-logo-area">
                     <h1>MEDCONFORM</h1>
@@ -332,7 +318,6 @@
                 </div>
             </div>
 
-            <!-- Secção 1: Identificação -->
             <div class="pdf-section">
                 <h3>1. Identificação do Processo</h3>
                 <div class="pdf-section-content">
@@ -342,19 +327,16 @@
                 </div>
             </div>
 
-            <!-- Secção 2: Parecer da Auditoria -->
             <div class="pdf-section">
                 <h3>2. Parecer Técnico</h3>
                 <div class="pdf-section-content">
                     <p class="pdf-status-line"><strong>Status Final:</strong> <span id="pdf-status"></span></p>
-
                     <div class="pdf-justificativa-box">
                         <p id="pdf-justificativa"></p>
                     </div>
                 </div>
             </div>
 
-            <!-- Secção 3: Assinaturas -->
             <div class="pdf-signature-section">
                 <div class="pdf-signature-block">
                     <div class="pdf-signature-line"></div>
@@ -363,9 +345,10 @@
                     <p class="pdf-signature-role">Medconform Systems</p>
                 </div>
             </div>
-
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>

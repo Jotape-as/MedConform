@@ -21,7 +21,6 @@ class Solicitacao(db.Model):
     valor_total = db.Column(db.Float, nullable=True)
     fornecedor_vencedor = db.Column(db.String(150), nullable=True)
 
-    # --- Métodos de Persistência Obrigatórios ---
     def salvar(self):
         db.session.add(self)
         db.session.commit()

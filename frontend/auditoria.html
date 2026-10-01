@@ -36,16 +36,19 @@
                     <a href="solicitacoes.html" class="menu-item"><i class="fa-regular fa-clipboard"></i>
                         Solicitações</a>
                     <a href="documentos.html" class="menu-item"><i class="fa-solid fa-file-medical"></i> Documentos</a>
-                    <a href="auditoria.html" class="menu-item active"><i class="fa-solid fa-gavel"></i> Auditoria</a>
+                    <a href="auditoria.html" id="menu-auditoria" class="menu-item active"><i
+                            class="fa-solid fa-gavel"></i> Auditoria</a>
                     <a href="materiais.html" class="menu-item"><i class="fa-solid fa-box-open"></i> Materiais</a>
                     <a href="#" class="menu-item"><i class="fa-solid fa-truck"></i> Fornecedores</a>
                     <a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
                     <a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
                 </nav>
             </div>
+
             <div class="sidebar-bottom">
                 <a href="#" class="menu-item"><i class="fa-regular fa-circle-question"></i> Ajuda</a>
-                <a href="#" class="menu-item sign-out"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
+                <a href="#" id="btn-logout" class="menu-item sign-out"><i
+                        class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
             </div>
         </aside>
 
@@ -62,15 +65,15 @@
                     <button class="icon-btn"><i class="fa-regular fa-circle-question"></i></button>
                     <div class="user-profile">
                         <div class="user-info text-right">
-                            <strong>Dra. Sarah Jenkins</strong>
-                            <span>Registradora Chefe</span>
+                            <strong id="user-name-display">Carregando...</strong>
+                            <span id="user-role-display">Aguarde...</span>
                         </div>
-                        <img src="https://i.pravatar.cc/150?img=5" alt="Perfil">
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Foto de Perfil">
                     </div>
                 </div>
             </header>
 
-            <!-- Conteúdo da Página de Auditoria -->
+            <!-- Page Content -->
             <div class="page-content">
                 <div class="page-header mb-25">
                     <div class="header-titles">
@@ -80,7 +83,6 @@
                 </div>
 
                 <div class="form-layout">
-
                     <!-- Coluna Principal (Fila de Casos) -->
                     <div class="form-main">
                         <div class="card table-card">
@@ -98,12 +100,10 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tabela-auditoria">
-                                        <!-- Apenas os casos "Pendentes" serão injetados aqui via JS -->
                                         <tr>
                                             <td colspan="4" class="table-empty-state">
-                                                <i class="fa-solid fa-check-double"></i><br>
-                                                <strong>Nenhuma pendência no momento</strong>
-                                                <p>A fila de auditoria está limpa.</p>
+                                                <i class="fa-solid fa-spinner fa-spin"></i><br>
+                                                <strong>Carregando fila de pendências...</strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -114,17 +114,13 @@
 
                     <!-- Coluna Lateral (Ações e IA) -->
                     <div class="form-sidebar">
-
                         <!-- Card de Análise da IA -->
                         <div class="card info-card card-ia">
                             <h3><i class="fa-solid fa-robot"></i> Copiloto de Auditoria (IA)</h3>
-                            <p id="ai-feedback" class="text-ia">
-                                Selecione um caso na fila para acionar a análise inteligente de coerência do pedido.
-                            </p>
+                            <p id="ai-feedback" class="text-ia">Selecione um caso na fila para acionar a análise
+                                inteligente de coerência do pedido.</p>
                             <button id="btn-analisar-ia" class="btn-outline btn-full btn-ia" disabled
-                                onclick="executarAnaliseIA()">
-                                Analisar Risco
-                            </button>
+                                onclick="executarAnaliseIA()">Analisar Risco</button>
                         </div>
 
                         <!-- Detalhes do Caso Selecionado -->
@@ -152,7 +148,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- 👆 FIM DO BLOCO NOVO 👆 -->
 
                         <!-- Formulário de Parecer -->
                         <div class="card mt-15">
@@ -177,7 +172,6 @@
                                     onclick="enviarParecer('Aprovado')">APROVAR</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
