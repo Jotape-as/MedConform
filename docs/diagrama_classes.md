@@ -67,9 +67,9 @@ classDiagram
         +salvar() void
     }
 
-    %% Relacionamentos
-    Usuario "1" -- "*" Solicitacao : Cria / Audita
+    %% Relacionamentos do Domínio
+    Usuario "1" -- "*" Solicitacao : Interage
     Solicitacao "1" *-- "*" Documento : Possui (Composição)
     Fornecedor "1" o-- "*" Material : Fornece (Agregação)
-    Solicitacao "*" -- "1" Fornecedor : Vencedor da Cotação
+    Solicitacao "*" -- "1" Fornecedor : Vencedor
 ```
