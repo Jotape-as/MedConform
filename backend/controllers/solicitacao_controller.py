@@ -8,6 +8,7 @@ from services.listar_pendentes_service import ListarPendentesService
 from services.emitir_parecer_service import EmitirParecerService
 from models.solicitacao import Solicitacao
 from dotenv import load_dotenv
+from services.analisar_ia_service import AnalisarIAService
 import os
 from google import genai
 import json
@@ -132,54 +133,21 @@ class SolicitacaoController:
 
     def analisar_com_ia(self, id):
         try:
-            solicitacao = Solicitacao.query.get(id)
-            
-            if not solicitacao:
-                return jsonify({"erro": "Solicitação não encontrada"}), 404
-
-            prompt_auditoria = f"""
-            Você é um Médico Auditor Chefe especialista em OPME (Órteses, Próteses e Materiais Especiais).
-            Sua missão é cruzar os dados clínicos do paciente com os materiais de alto custo solicitados no catálogo oficial do hospital. O objetivo é bloquear fraudes, superfaturamentos por quantidade abusiva e erros anatômicos.
-
-            DADOS DO PEDIDO CLÍNICO:
-            - Procedimento Cirúrgico: {solicitacao.procedimento}
-            - Justificativa Médica: {solicitacao.justificativa}
-            - Materiais Selecionados e Quantidades: {solicitacao.materiais_solicitados}
-
-            REGRAS DE AUDITORIA CRÍTICA:
-            1. Pertinência Anatômica: Os materiais escolhidos fazem sentido para a região do corpo descrita no procedimento?
-            2. Controle de Excesso: A quantidade solicitada de cada item é compatível com o padrão da cirurgia, ou há indícios claros de desperdício/fraude visando lucro?
-
-            Responda EXCLUSIVAMENTE em formato JSON, sem nenhuma formatação Markdown (```json), usando exatamente esta estrutura:
-            {{
-                "status": "APROVADO",
-                "risco_fraude": "BAIXO",
-                "parecer_tecnico": "Escreva o parecer aqui..."
-            }}
-            """
-            
-            chave_api = os.getenv("GEMINI_API_KEY")
-            client = genai.Client(api_key=chave_api) 
-            resposta = client.models.generate_content(
-                model='gemini-3.6-flash',
-                contents=prompt_auditoria
-            )
-            
-            texto_limpo = resposta.text.replace('```json', '').replace('```', '').strip()
-            dados_ia = json.loads(texto_limpo)
-            
+            service = AnalisarIAService()
+            dados_ia = service.executar(id)
             return jsonify(dados_ia), 200
 
+        except ValueError as ve:
+            return jsonify({"erro": str(ve)}), 404
         except Exception as e:
             erro_str = str(e)
             print(f"Erro na IA: {erro_str}")
             
-            # Interceção amigável do erro 503 da Google
             if "503" in erro_str or "UNAVAILABLE" in erro_str:
                 return jsonify({
                     "status": "AGUARDANDO",
                     "risco_fraude": "INDEFINIDO",
-                    "parecer_tecnico": "⚠️ **Aviso de Sistema:** Os servidores de Inteligência Artificial estão a experienciar um pico temporário de acessos no momento. Por favor, aguarde alguns minutos e tente analisar novamente."
-                }), 200 # Devolve 200 para o JavaScript conseguir ler a mensagem e exibi-la no cartão azul
+                    "parecer_tecnico": "⚠️ **Aviso de Sistema:** Os servidores de Inteligência Artificial estão com pico de acessos. Aguarde alguns instantes e tente novamente."
+                }), 200
                 
             return jsonify({"erro": "Falha ao processar com IA."}), 500

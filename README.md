@@ -32,31 +32,31 @@ O "motor" do sistema é uma API RESTful desenvolvida em Python com o framework F
 
 ## 🚀 Funcionalidades Implementadas
 
-O projeto MedConform atende aos requisitos propostos entregando fluxos de operações completos, divididos em *Services* e *Controllers*. 
+1. Realizar Login no sistema com verificação de perfil (Médico/Auditor)
+2. Visualizar Dashboard com estatísticas globais de OPME (via Repository)
+3. Cadastrar nova Solicitação clínica
+4. Listar todas as Solicitações ativas
+5. Visualizar detalhes completos de uma Solicitação
+6. Atualizar o status de aprovação de uma Solicitação
+7. Excluir uma Solicitação cancelada
+8. **Analisar Risco com IA (Gemini):** Auditoria automatizada cruzando procedimento e materiais solicitados
+9. Fazer Upload de Documentos e exames anexos
+10. Listar Documentos vinculados a uma Solicitação
+11. Excluir Documento específico
+12. Cadastrar novo Material (catálogo OPME)
+13. Listar Materiais cadastrados
+14. Atualizar preço base de um Material
+15. Excluir Material do catálogo
+16. Buscar/Filtrar Solicitações e Materiais no sistema
+17. Cadastrar novo Fornecedor homologado
+18. Listar Fornecedores cadastrados
+19. Excluir Fornecedor
+20. Cadastrar novo Usuário (Médico ou Auditor) controlando e-mails duplicados
 
-### Autenticação e Regras de Negócio (Avançado)
-*   **🤖 Auditoria Automatizada (IA):** Integração com a API do Google Gemini para analisar justificativas médicas e gerar pareceres técnicos de conformidade clínica.
-*   **🔐 Autenticação de Utilizadores:** Sistema de Login gerido via sessões no backend (Flask `server-side`), garantindo a proteção das rotas.
-*   **🛡️ Controlo de Acesso (RBAC):** Renderização dinâmica da interface, ocultando menus e botões de acordo com o perfil logado (Médico Cirurgião vs. Auditor Chefe).
-*   **👁️ Segregação de Dados:** Filtro de privacidade na base de dados que garante que o médico solicitante apenas visualize os dados dos seus próprios pacientes.
-*   **📄 Geração de Laudos Oficiais em PDF:** Exportação de pareceres técnicos em papel timbrado renderizado através de um "molde fantasma" (HTML/CSS dinâmico) para o `html2pdf.js`.
-*   **🌐 Segurança de Tráfego (CORS):** Configuração avançada de cabeçalhos e credenciais para a comunicação segura entre diferentes origens (Frontend 5500 ↔ Backend 5000).
+## 📊 Diagrama de Classes
 
-### Gestão de Solicitações OPME (CRUD)
-*   **Criar (POST):** Cadastro de novas solicitações contendo dados do paciente, médico solicitante e detalhes dos procedimentos cirúrgicos.
-*   **Listar (GET):** Busca na base de dados e exibição dinâmica dos registos na tabela principal do sistema.
-*   **Atualizar Status (PUT):** Aprovação ou negação rápida de solicitações ativas diretamente pelos botões de ação na interface.
-*   **Excluir (DELETE):** Remoção permanente e segura de registos de solicitações da base de dados.
-
-### Gestão de Documentos Clínicos
-*   **Anexar Documento (POST):** Cadastro de laudos, exames de imagem e guias de convénio.
-*   **Listar Documentos (GET):** Visualização em tabela de todos os ficheiros anexados, categorizados por tipo e status.
-*   **Editar Documento (PUT):** Reaproveitamento do formulário para carregar e atualizar os dados de um documento existente.
-*   **Excluir Documento (DELETE):** Remoção de documentos indesejados ou expirados.
-
-### Estatísticas e Usabilidade
-*   **📊 Dashboard em Tempo Real (GET):** Endpoint dedicado no backend para calcular e exibir dinamicamente os Indicadores Chave (KPIs) nos cards superiores (pendências, aprovadas/negadas, tempo médio).
-*   **🔍 Filtros Dinâmicos de Tabela:** Algoritmo em JavaScript que permite alternar as abas ("Todos os Casos", "Pendentes", "Aprovados") filtrando os dados instantaneamente sem recarregar a página.
+O diagrama de classes (UML) refletindo o domínio da aplicação (relacionamentos de herança, composição e agregação) encontra-se no diretório `docs/`. 
+* Pode ser visualizado no ficheiro: `docs/diagrama_classes.md` (ou `docs/diagrama.png`).
 
 ---
 

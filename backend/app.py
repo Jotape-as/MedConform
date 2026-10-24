@@ -8,7 +8,12 @@ from models.usuario import Usuario
 
 from controllers.solicitacao_controller import SolicitacaoController
 from controllers.documento_controller import DocumentoController
-from controllers.material_controller import MaterialController 
+from controllers.material_controller import MaterialController
+from controllers.fornecedor_controller import FornecedorController
+fornecedor_controller = FornecedorController()
+from models.fornecedor import Fornecedor
+from controllers.usuario_controller import UsuarioController
+usuario_controller = UsuarioController()
 
 # ==========================================
 # CONFIGURAÇÕES DO SERVIDOR
@@ -138,5 +143,22 @@ def atualizar_documento(id):
 def deletar_documento(id):
     return documento_controller.excluir(id)
 
+@app.route('/api/fornecedores', methods=['GET', 'POST'])
+def gerenciar_fornecedores():
+    if request.method == 'POST':
+        return fornecedor_controller.criar(request)
+    return fornecedor_controller.listar()
+
+@app.route('/api/fornecedores/<int:id>', methods=['DELETE'])
+def deletar_fornecedor(id):
+    return fornecedor_controller.excluir(id)
+
+@app.route('/api/usuarios', methods=['POST'])
+def criar_usuario():
+    return usuario_controller.criar(request)
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
+
+

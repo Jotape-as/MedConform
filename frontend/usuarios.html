@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medconform - Usuários</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="logo-area">
+                    <div class="logo-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
+                    <div class="logo-text">
+                        <h1>Medconform</h1>
+                        <span>LOGÍSTICA CLÍNICA</span>
+                    </div>
+                </div>
+
+                <nav class="main-menu mt-20">
+                    <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                    <a href="solicitacoes.html" class="menu-item"><i class="fa-regular fa-clipboard"></i>
+                        Solicitações</a>
+                    <a href="documentos.html" class="menu-item"><i class="fa-solid fa-file-medical"></i> Documentos</a>
+                    <a href="auditoria.html" class="menu-item"><i class="fa-solid fa-gavel"></i> Auditoria</a>
+                    <a href="materiais.html" class="menu-item"><i class="fa-solid fa-box-open"></i> Materiais</a>
+                    <a href="fornecedores.html" class="menu-item"><i class="fa-solid fa-truck"></i> Fornecedores</a>
+                    <a href="usuarios.html" class="menu-item active"><i class="fa-solid fa-users"></i> Usuários</a>
+                </nav>
+            </div>
+
+            <div class="sidebar-bottom">
+                <a href="#" id="btn-logout" class="menu-item sign-out"><i
+                        class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="header-titles">
+                        <h2>Gestão de Usuários</h2>
+                        <p>Controlo de acessos para Médicos Cirurgiões e Auditores Chefes.</p>
+                    </div>
+                    <div class="header-buttons">
+                        <button class="btn-primary" onclick="abrirModalUsuario()">
+                            <i class="fa-solid fa-user-plus"></i> Novo Usuário
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabela de Usuários -->
+                <div class="card table-card mt-20">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NOME</th>
+                                    <th>EMAIL</th>
+                                    <th>PERFIL</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-usuarios">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Adicionar Novo Usuário -->
+    <div id="modal-usuario" class="modal-overlay oculto">
+        <div class="modal-content card modal-compacto">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-shield"></i> Cadastrar Usuário</h3>
+                <button class="btn-close" onclick="fecharModalUsuario()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body mt-15">
+                <form id="form-usuario" onsubmit="salvarUsuario(event)">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="usu-nome" class="form-control" required placeholder="Ex: Dr. João Silva">
+                    </div>
+                    <div class="form-group mt-10">
+                        <label>Email (Login)</label>
+                        <input type="email" id="usu-email" class="form-control" required
+                            placeholder="medico@hospital.com">
+                    </div>
+                    <div class="form-group mt-10">
+                        <label>Senha Provisória</label>
+                        <input type="password" id="usu-senha" class="form-control" required placeholder="******">
+                    </div>
+                    <div class="form-group mt-10">
+                        <label>Perfil de Acesso</label>
+                        <select id="usu-perfil" class="form-control" required>
+                            <option value="">Selecione o perfil...</option>
+                            <option value="medico">Médico Cirurgião</option>
+                            <option value="auditor">Auditor Chefe</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions-modal">
+                        <button type="button" class="btn-cancelar" onclick="fecharModalUsuario()">Cancelar</button>
+                        <button type="submit" class="btn-salvar">Salvar Usuário</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

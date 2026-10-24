@@ -2111,3 +2111,37 @@ input[readonly] {
     font-size: 12px;
     color: #64748b;
 }
+
+/* ==========================================
+   AÇÕES DOS MODAIS (Fornecedores e Usuários)
+   ========================================== */
+.form-actions-modal {
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 15px !important;
+    margin-top: 20px !important;
+    width: 100% !important;
+}
+
+.form-actions-modal .btn-cancelar {
+    padding: 10px 20px !important;
+    background: white !important;
+    border: 1px solid #ccc !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    width: max-content !important; /* Impede o botão de esticar */
+    flex: none !important;
+    font-weight: 500;
+}
+
+.form-actions-modal .btn-salvar {
+    padding: 10px 20px !important;
+    background: #0b5b9e !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    width: max-content !important; /* Impede o botão de esticar */
+    flex: none !important;
+    font-weight: 500;
+}

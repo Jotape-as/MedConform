@@ -783,3 +783,141 @@ function gerarLaudoPDF() {
         btnPdf.innerHTML = textoOriginal;
     });
 }
+
+// ==========================================
+// MÓDULO: FORNECEDORES 
+// ==========================================
+
+const API_FORNECEDORES = 'http://127.0.0.1:5000/api/fornecedores';
+
+// 1. Listar Fornecedores (GET)
+async function carregarFornecedores() {
+    const tbody = document.getElementById('tabela-fornecedores');
+    if (!tbody) return;
+
+    try {
+        const resposta = await fetch(API_FORNECEDORES);
+        const fornecedores = await resposta.json();
+
+        tbody.innerHTML = '';
+        fornecedores.forEach(f => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>#F-${String(f.id).padStart(4, '0')}</td>
+                    <td><strong>${f.nome_empresa}</strong></td>
+                    <td>${f.cnpj}</td>
+                    <td><span class="status-badge aprovado">${f.status}</span></td>
+                    <td>
+                        <button class="btn-icon text-danger" onclick="deletarFornecedor(${f.id})" title="Excluir">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    } catch (erro) {
+        console.error("Erro ao carregar fornecedores:", erro);
+    }
+}
+
+// 2. Cadastrar Fornecedor (POST)
+async function salvarFornecedor(event) {
+    event.preventDefault();
+
+    const nome = document.getElementById('forn-nome').value;
+    const cnpj = document.getElementById('forn-cnpj').value;
+
+    try {
+        const resposta = await fetch(API_FORNECEDORES, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome_empresa: nome, cnpj: cnpj })
+        });
+
+        if (resposta.ok) {
+            fecharModalFornecedor();
+            document.getElementById('form-fornecedor').reset();
+            carregarFornecedores();
+        } else {
+            alert('Erro ao salvar fornecedor.');
+        }
+    } catch (erro) {
+        console.error("Erro ao salvar:", erro);
+    }
+}
+
+// 3. Excluir Fornecedor (DELETE)
+async function deletarFornecedor(id) {
+    if (!confirm("Tem certeza que deseja excluir este fornecedor?")) return;
+
+    try {
+        const resposta = await fetch(`${API_FORNECEDORES}/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (resposta.ok) {
+            carregarFornecedores();
+        } else {
+            alert('Erro ao excluir fornecedor.');
+        }
+    } catch (erro) {
+        console.error("Erro ao excluir:", erro);
+    }
+}
+
+function abrirModalFornecedor() {
+    document.getElementById('modal-fornecedor').classList.remove('oculto');
+}
+
+function fecharModalFornecedor() {
+    document.getElementById('modal-fornecedor').classList.add('oculto');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    carregarFornecedores();
+});
+
+// ==========================================
+// MÓDULO: USUÁRIOS (Funcionalidade 20)
+// ==========================================
+
+const API_USUARIOS = 'http://127.0.0.1:5000/api/usuarios';
+
+// 1. Cadastrar Usuário (POST)
+async function salvarUsuario(event) {
+    event.preventDefault();
+
+    const nome = document.getElementById('usu-nome').value;
+    const email = document.getElementById('usu-email').value;
+    const senha = document.getElementById('usu-senha').value;
+    const perfil = document.getElementById('usu-perfil').value;
+
+    try {
+        const resposta = await fetch(API_USUARIOS, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome, email, senha, perfil })
+        });
+
+        const dados = await resposta.json();
+
+        if (resposta.ok) {
+            alert(dados.mensagem);
+            fecharModalUsuario();
+            document.getElementById('form-usuario').reset();
+        } else {
+            alert('Erro: ' + (dados.erro || 'Falha ao cadastrar.'));
+        }
+    } catch (erro) {
+        console.error("Erro ao salvar usuário:", erro);
+        alert('Erro de conexão com o servidor.');
+    }
+}
+
+function abrirModalUsuario() {
+    document.getElementById('modal-usuario').classList.remove('oculto');
+}
+
+function fecharModalUsuario() {
+    document.getElementById('modal-usuario').classList.add('oculto');
+}
