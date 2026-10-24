@@ -1,3 +1,4 @@
+```mermaid
 classDiagram
     class Usuario {
         +Integer id
@@ -71,3 +72,4 @@ classDiagram
     Solicitacao "1" *-- "*" Documento : Possui (Composição)
     Fornecedor "1" o-- "*" Material : Fornece (Agregação)
     Solicitacao "*" -- "1" Fornecedor : Vencedor da Cotação
+```
