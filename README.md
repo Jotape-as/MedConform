@@ -97,3 +97,7 @@ Henrique Braga Soares
 João Pedro Santana
 
 Matheus Belthodo
+
+João Pedro Durães 
+
+Matheus Cordeiro 
