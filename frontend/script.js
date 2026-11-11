@@ -1,5 +1,5 @@
-const API_URL_DOCUMENTOS = "http://127.0.0.1:5000/api/documentos";
-const API_URL_SOLICITACOES = "http://127.0.0.1:5000/api/solicitacoes";
+const API_URL_DOCUMENTOS = "/api/documentos";
+const API_URL_SOLICITACOES = "/api/solicitacoes";
 
 window.solicitacoesGlobais = [];
 window.documentosGlobais = [];
