@@ -88,16 +88,10 @@ O MedConform continua a receber novas funcionalidades e otimizações de código
 👥 Equipa e Contexto Académico
 Projeto desenvolvido como parte da formação técnica em Redes e Arquitetura de Computadores no Colégio COTEMIG.
 
-Membros da Equipa:
-
-Alexandre Luiz Silva
+Membros da Equipe:
 
 Henrique Braga Soares
 
 João Pedro Santana
 
 Matheus Belthodo
-
-João Pedro Durães 
-
-Matheus Cordeiro 
